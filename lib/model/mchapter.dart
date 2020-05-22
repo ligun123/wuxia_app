@@ -1,27 +1,29 @@
-class MChapter {
-    int id;
-    String name;
-    String spiderUrl;
-    int bookId;
-    int cindex;
-    String content;
-    int wordCount;
-    int readCount;
-    int time;
+import 'package:app/model/xmodel.dart';
 
-    MChapter({
-        this.id,
-        this.name,
-        this.spiderUrl,
-        this.bookId,
-        this.cindex,
-        this.content,
-        this.wordCount,
-        this.readCount,
-        this.time,
-    });
+class MChapter extends XModel {
+  int id;
+  String name;
+  String spiderUrl;
+  int bookId;
+  int cindex;
+  String content;
+  int wordCount;
+  int readCount;
+  int time;
 
-    factory MChapter.fromJson(Map<String, dynamic> json) => MChapter(
+  MChapter({
+    this.id,
+    this.name,
+    this.spiderUrl,
+    this.bookId,
+    this.cindex,
+    this.content,
+    this.wordCount,
+    this.readCount,
+    this.time,
+  });
+
+  factory MChapter.fromJson(Map<String, dynamic> json) => MChapter(
         id: json["id"],
         name: json["name"],
         spiderUrl: json["spider_url"],
@@ -31,9 +33,9 @@ class MChapter {
         wordCount: json["word_count"],
         readCount: json["read_count"],
         time: json["time"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "spider_url": spiderUrl,
@@ -43,15 +45,18 @@ class MChapter {
         "word_count": wordCount,
         "read_count": readCount,
         "time": time,
-    };
+      };
+
+  @override
+  MChapter Function(Map<String, dynamic> json) get jsonTransfer => (json) {
+    return MChapter.fromJson(json);
+  };
 }
-
-
 
 /**
  * 简易的Chapter
  */
-class MChapterSimple {
+class MChapterSimple extends XModel {
   int id;
   String name;
 
@@ -69,4 +74,10 @@ class MChapterSimple {
         "id": id,
         "name": name,
       };
+
+  @override
+  MChapter Function(Map<String, dynamic> json) get jsonTransfer => (json) {
+    return MChapter.fromJson(json);
+  };
+      
 }

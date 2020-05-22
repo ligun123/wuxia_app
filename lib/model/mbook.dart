@@ -1,6 +1,7 @@
 import 'package:app/model/mchapter.dart';
+import 'package:app/model/xmodel.dart';
 
-class MBook {
+class MBook extends XModel {
   int id;
   String uid;
   String name;
@@ -63,5 +64,10 @@ class MBook {
         "word_count": wordCount,
         "chapters": List<dynamic>.from(chapters.map((x) => x.toJson())),
       };
-}
 
+  @override
+  MBook Function(Map<String, dynamic> json) get jsonTransfer => (json) {
+    return MBook.fromJson(json);
+  };
+
+}

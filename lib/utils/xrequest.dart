@@ -1,3 +1,4 @@
+import 'package:app/utils/xresponse.dart';
 import 'package:dcache_flutter/dcache.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/src/adapters/io_adapter.dart';
@@ -34,33 +35,41 @@ class XRequest {
     this.cachePolicy = DCachePolicy.refreshFirst,
   });
 
-  Future<Response> send() async {
-    final opt = RequestOptions(
-      headers: this.header,
-      baseUrl: this.baseUrl,
-    );
-    DCacheOptions optOfCache = DCacheOptions(
-      age: this.cacheDuration,
-      policy: this.cachePolicy,
-    );
-    opt.extra = optOfCache.toJson();
-    Response resp;
-    switch (this.method) {
-      case XRequestMethod.GET:
-        resp = await _dio.get(this.path,
-            queryParameters: this.query, options: opt);
-        break;
-      case XRequestMethod.POST:
-        resp = await _dio.post(
-          this.path,
-          data: this.body,
-          queryParameters: this.query,
-          options: opt,
-        );
-        break;
-      default:
+  /**
+   * json是List/Map
+   */
+  Future<XResponse<T>> send<T>([T jsonTransfer(dynamic json)]) async {
+    try {
+      final opt = RequestOptions(
+        headers: this.header,
+        baseUrl: this.baseUrl,
+      );
+      DCacheOptions optOfCache = DCacheOptions(
+        age: this.cacheDuration,
+        policy: this.cachePolicy,
+      );
+      opt.extra = optOfCache.toJson();
+      Response resp;
+      switch (this.method) {
+        case XRequestMethod.GET:
+          resp = await _dio.get(this.path,
+              queryParameters: this.query, options: opt);
+          break;
+        case XRequestMethod.POST:
+          resp = await _dio.post(
+            this.path,
+            data: this.body,
+            queryParameters: this.query,
+            options: opt,
+          );
+          break;
+        default:
+      }
+      final xresp = XResponse<T>.fromOrigin(resp, jsonTransfer);
+      return xresp;
+    } catch (e) {
+      return XResponse(error: e);
     }
-    return resp;
   }
 
   static void setupDio([BaseOptions options]) {

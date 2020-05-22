@@ -10,7 +10,6 @@ class XResponse<T> {
     this.code,
     this.msg,
     this.data,
-    this.error,
   });
 
   XResponse.fromOrigin(Response<Map<String, dynamic>> resp,
@@ -20,4 +19,15 @@ class XResponse<T> {
     this.code = dataJson["code"] as int;
     this.msg = dataJson["msg"] as String;
   }
+
+  XResponse.fromError(dynamic e) {
+    this.error = e;
+    this.code = -1;
+    this.msg = e.toString();
+  }
+
+  bool isOK() {
+    return this.code == 200;
+  }
+  
 }

@@ -1,6 +1,7 @@
 import 'package:app/model/mbook.dart';
 import 'package:app/model/mchapter.dart';
 import 'package:app/model/mcategory.dart';
+import 'package:app/model/mhome.dart';
 import 'package:app/utils/xrequest.dart';
 import 'package:app/utils/xresponse.dart';
 
@@ -60,6 +61,14 @@ class XApi {
         XRequest(path: "/category");
     return req.send<MCategory>((json) {
       return MCategory.fromJson(json);
+    });
+  }
+
+  static Future<XResponse<MHome>> home() {
+    final req =
+        XRequest(path: "/home");
+    return req.send<MHome>((json) {
+      return MHome.fromJson(json);
     });
   }
 }

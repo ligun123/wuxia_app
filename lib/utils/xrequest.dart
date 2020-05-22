@@ -49,7 +49,7 @@ class XRequest {
         policy: this.cachePolicy,
       );
       opt.extra = optOfCache.toJson();
-      Response resp;
+      Response<Map<String, dynamic>> resp;
       switch (this.method) {
         case XRequestMethod.GET:
           resp = await _dio.get(this.path,
@@ -68,6 +68,7 @@ class XRequest {
       final xresp = XResponse<T>.fromOrigin(resp, jsonTransfer);
       return xresp;
     } catch (e) {
+      print(e);
       return XResponse(error: e);
     }
   }

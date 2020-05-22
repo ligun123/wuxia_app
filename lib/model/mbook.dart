@@ -65,9 +65,4 @@ class MBook extends XModel {
         "chapters": List<dynamic>.from(chapters.map((x) => x.toJson())),
       };
 
-  @override
-  MBook Function(Map<String, dynamic> json) get jsonTransfer => (json) {
-    return MBook.fromJson(json);
-  };
-
 }

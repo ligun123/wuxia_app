@@ -47,10 +47,6 @@ class MChapter extends XModel {
         "time": time,
       };
 
-  @override
-  MChapter Function(Map<String, dynamic> json) get jsonTransfer => (json) {
-    return MChapter.fromJson(json);
-  };
 }
 
 /**
@@ -74,10 +70,5 @@ class MChapterSimple extends XModel {
         "id": id,
         "name": name,
       };
-
-  @override
-  MChapter Function(Map<String, dynamic> json) get jsonTransfer => (json) {
-    return MChapter.fromJson(json);
-  };
       
 }

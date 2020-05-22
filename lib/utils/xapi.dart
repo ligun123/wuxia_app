@@ -1,5 +1,6 @@
 import 'package:app/model/mbook.dart';
 import 'package:app/model/mchapter.dart';
+import 'package:app/model/mcategory.dart';
 import 'package:app/utils/xrequest.dart';
 import 'package:app/utils/xresponse.dart';
 
@@ -37,6 +38,28 @@ class XApi {
     );
     return req.send<MChapter>((json) {
       return MChapter.fromJson(json);
+    });
+  }
+
+  static Future<XResponse<MChapter>> chapterLast({int index, String bookid}) {
+    final req = XRequest(
+      method: XRequestMethod.POST,
+      path: "/chapter/next",
+      body: {
+        "cindex": index,
+        "bookid": bookid,
+      },
+    );
+    return req.send<MChapter>((json) {
+      return MChapter.fromJson(json);
+    });
+  }
+
+  static Future<XResponse<MCategory>> category() {
+    final req =
+        XRequest(path: "/category");
+    return req.send<MCategory>((json) {
+      return MCategory.fromJson(json);
     });
   }
 }

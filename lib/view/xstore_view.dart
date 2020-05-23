@@ -11,15 +11,25 @@ class _XStoreViewState extends State<XStoreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("School"),),
-      body: GestureDetector(
-        child: Center(
-          child: Text("School"),
+        appBar: AppBar(
+          title: Text("School"),
         ),
-        onTap: () {
-          XRoutes.push(context, "XSubView", arguments: ["School->SubView"]);
-        },
-      ),
-    );
+        body: Container(
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (ctx, index) {
+              if (index == 0) {
+                return Container(
+                  height: 100,
+                  color: Colors.black,
+                );
+              } else {
+                return ListTile(
+                  leading: Text("asdasd"),
+                );
+              }
+            },
+          ),
+        ));
   }
 }

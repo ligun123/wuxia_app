@@ -1,7 +1,7 @@
-import 'package:app/view/xhome_view.dart';
-import 'package:app/view/xschool_view.dart';
-import 'package:app/view/xsettings_view.dart';
-import 'package:flutter/material.dart';
+import "package:app/view/xhome_view.dart";
+import "package:app/view/xschool_view.dart";
+import "package:app/view/xsettings_view.dart";
+import "package:flutter/material.dart";
 
 class XBottomController extends StatefulWidget {
   XBottomController({Key key}) : super(key: key);
@@ -50,15 +50,15 @@ class _XBottomControllerState extends State<XBottomController> {
     return [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
-        title: Text('Home'),
+        title: Text("Home"),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.school),
-        title: Text('School'),
+        icon: Icon(Icons.store),
+        title: Text("Store"),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.settings),
-        title: Text('Settings'),
+        title: Text("Settings"),
       ),
     ];
   }

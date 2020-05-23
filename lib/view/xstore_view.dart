@@ -1,5 +1,5 @@
-import 'package:app/xroutes.dart';
-import 'package:flutter/material.dart';
+import "package:app/xroutes.dart";
+import "package:flutter/material.dart";
 
 class XStoreView extends StatefulWidget {
   XStoreView({Key key}) : super(key: key);
@@ -17,7 +17,7 @@ class _XStoreViewState extends State<XStoreView> {
           child: Text("School"),
         ),
         onTap: () {
-          XRoutes.push(context, 'XSubView', arguments: ['School->SubView']);
+          XRoutes.push(context, "XSubView", arguments: ["School->SubView"]);
         },
       ),
     );

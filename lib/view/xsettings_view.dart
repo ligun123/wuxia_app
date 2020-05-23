@@ -1,5 +1,5 @@
-import 'package:app/xroutes.dart';
-import 'package:flutter/material.dart';
+import "package:app/xroutes.dart";
+import "package:flutter/material.dart";
 
 class XSettingsView extends StatefulWidget {
   XSettingsView({Key key}) : super(key: key);
@@ -17,7 +17,7 @@ class _XSettingsViewState extends State<XSettingsView> {
           child: Text("Settings"),
         ),
         onTap: () {
-          XRoutes.push(context, 'XSubView', arguments: ['Settings->SubView']);
+          XRoutes.push(context, "XSubView", arguments: ["Settings->SubView"]);
         },
       ),
     );

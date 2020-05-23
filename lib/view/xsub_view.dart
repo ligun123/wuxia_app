@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class XSubView extends StatefulWidget {
   final String centerString;

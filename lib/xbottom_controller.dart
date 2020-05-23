@@ -1,5 +1,5 @@
 import "package:app/view/xhome_view.dart";
-import "package:app/view/xschool_view.dart";
+import "package:app/view/xstore_view.dart";
 import "package:app/view/xsettings_view.dart";
 import "package:flutter/material.dart";
 
@@ -19,7 +19,7 @@ class _XBottomControllerState extends State<XBottomController> {
     super.initState();
     pageViews.addAll([
       XHomeView(),
-      XSchoolView(),
+      XStoreView(),
       XSettingsView(),
     ]);
     pageController = PageController(initialPage: pageIndex);

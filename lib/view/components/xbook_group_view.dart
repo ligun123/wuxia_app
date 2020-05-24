@@ -7,12 +7,15 @@ class XBookGroupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        _buildTitleRow(context),
-        _buildContent(context),
-      ],
+    return Container(
+      margin: EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _buildTitleRow(context),
+          _buildContent(context),
+        ],
+      ),
     );
   }
 

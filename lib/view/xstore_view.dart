@@ -1,3 +1,4 @@
+import 'package:app/view/components/xbook_group_view.dart';
 import "package:app/xroutes.dart";
 import "package:flutter/material.dart";
 
@@ -24,9 +25,7 @@ class _XStoreViewState extends State<XStoreView> {
                   color: Colors.black,
                 );
               } else {
-                return ListTile(
-                  leading: Text("asdasd"),
-                );
+                return XBookGroupView();
               }
             },
           ),

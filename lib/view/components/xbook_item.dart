@@ -9,17 +9,24 @@ class XBookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       width: 100,
-      height: 135,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Image.asset(
             "assets/unknown.jpg",
             width: 75,
             height: 100,
           ),
-          Text("The God eater"),
+          Text(
+            "The God eater asdasdasdasasdasdasdasdadsd",
+            // style: theme.textTheme.subhead,
+            maxLines: 3,
+            softWrap: false,
+            overflow: TextOverflow.ellipsis,
+          )
         ],
       ),
     );

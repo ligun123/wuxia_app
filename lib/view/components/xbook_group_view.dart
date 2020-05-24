@@ -8,7 +8,7 @@ class XBookGroupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -20,6 +20,7 @@ class XBookGroupView extends StatelessWidget {
   }
 
   Widget _buildTitleRow(BuildContext context) {
+    final theme = Theme.of(context);
     return SizedBox(
       height: 56,
       child: Row(
@@ -27,11 +28,19 @@ class XBookGroupView extends StatelessWidget {
           Icon(
             Icons.book,
             size: 16,
+            color: theme.colorScheme.primary,
           ),
-          Text("Section Title"),
+          SizedBox(width: 4),
+          Text(
+            "Section Title",
+            style: theme.textTheme.subtitle,
+          ),
           Spacer(),
           GestureDetector(
-            child: Text("More"),
+            child: Text(
+              "More",
+              style: theme.textTheme.subtitle.copyWith(color: theme.primaryColor),
+            ),
             onTap: () {
               //TODO: jump to more
             },
@@ -47,8 +56,11 @@ class XBookGroupView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           XBookCell(),
+          SizedBox(height: 8),
           XBookCell(),
+          SizedBox(height: 8),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               XBookItem(),
               XBookItem(),

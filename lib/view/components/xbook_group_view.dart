@@ -1,5 +1,6 @@
 import 'package:app/view/components/xbook_cell.dart';
 import 'package:app/view/components/xbook_item.dart';
+import 'package:app/xroutes.dart';
 import "package:flutter/material.dart";
 
 class XBookGroupView extends StatelessWidget {
@@ -77,7 +78,7 @@ class XBookGroupView extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         //TODO: jump to book detail
-        print("to book detail");
+        XRoutes.push(context, "XBookView");
       },
       child: bookWidget,
     );

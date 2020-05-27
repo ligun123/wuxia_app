@@ -12,7 +12,7 @@ class XBookCell extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Image.asset(
-            "assets/unknown.jpg",
+            "assets/icon_unknown.jpg",
             width: 75,
             height: 100,
           ),

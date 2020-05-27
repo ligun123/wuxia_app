@@ -15,7 +15,7 @@ class XBookItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Image.asset(
-            "assets/unknown.jpg",
+            "assets/icon_unknown.jpg",
             width: 75,
             height: 100,
           ),

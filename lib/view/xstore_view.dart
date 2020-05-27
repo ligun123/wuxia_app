@@ -14,7 +14,7 @@ class _XStoreViewState extends State<XStoreView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("School"),
+        title: Text("Store"),
       ),
       body: Container(
         margin: EdgeInsets.only(top: 12, bottom: 12),

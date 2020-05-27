@@ -14,11 +14,24 @@ class _XBookViewState extends State<XBookView> {
       appBar: AppBar(
         title: Text("Book Name"),
       ),
+      bottomNavigationBar: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          FlatButton(
+            child: Text("data"),
+          ),
+          FlatButton(
+            child: Text("data"),
+          ),
+        ],
+      ),
       body: ListView.builder(
         itemCount: 10 + 1,
         itemBuilder: (ctx, index) {
           if (index == 0) {
             return XBookDetailBanner();
+          } else if (index == 1) {
+            return XBookIntro();
           } else {
             return ListTile(
               leading: Text("Chapter $index xxx"),

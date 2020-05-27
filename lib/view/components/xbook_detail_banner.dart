@@ -23,23 +23,76 @@ class _XBookDetailBannerState extends State<XBookDetailBanner> {
           ),
           SizedBox(width: 8),
           SizedBox(
+            width: MediaQuery.of(context).size.width - 32 - 75 - 8,
             height: bookHeight,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Book Name",
+                  "halloworldhalloworldhalloworldhalloworldhalloworldhallo worldhallo worldhallo world",
                   style: textTheme.subtitle.copyWith(fontSize: 16),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Text("Auther Name"),
-                Text("Category"),
-                Text("Status"),
+                Text(
+                  "Auther Name",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  "Category",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  "Status",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+class XBookIntro extends StatefulWidget {
+  XBookIntro({Key key}) : super(key: key);
+
+  _XBookIntroState createState() => _XBookIntroState();
+}
+
+class _XBookIntroState extends State<XBookIntro> {
+  bool isFull = false;
+  @override
+  Widget build(BuildContext context) {
+    final body = Container(
+      padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+      child: _buildText(
+          "askldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasd"),
+    );
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isFull = !isFull;
+        });
+      },
+      child: body,
+    );
+  }
+
+  Widget _buildText(String data) {
+    if (isFull) {
+      return Text(data);
+    } else {
+      return Text(
+        data,
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
   }
 }

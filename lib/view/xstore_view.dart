@@ -1,4 +1,5 @@
 import 'package:app/view/components/xbook_group_view.dart';
+import 'package:app/view/components/xcategory_banner.dart';
 import "package:app/xroutes.dart";
 import "package:flutter/material.dart";
 
@@ -12,23 +13,22 @@ class _XStoreViewState extends State<XStoreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("School"),
+      appBar: AppBar(
+        title: Text("School"),
+      ),
+      body: Container(
+        margin: EdgeInsets.only(top: 12, bottom: 12),
+        child: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (ctx, index) {
+            if (index == 0) {
+              return XCategoryBanner();
+            } else {
+              return XBookGroupView();
+            }
+          },
         ),
-        body: Container(
-          child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (ctx, index) {
-              if (index == 0) {
-                return Container(
-                  height: 100,
-                  color: Colors.black,
-                );
-              } else {
-                return XBookGroupView();
-              }
-            },
-          ),
-        ));
+      ),
+    );
   }
 }

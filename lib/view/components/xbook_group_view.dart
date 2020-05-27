@@ -39,7 +39,8 @@ class XBookGroupView extends StatelessWidget {
           GestureDetector(
             child: Text(
               "More",
-              style: theme.textTheme.subtitle.copyWith(color: theme.primaryColor),
+              style:
+                  theme.textTheme.subtitle.copyWith(color: theme.primaryColor),
             ),
             onTap: () {
               //TODO: jump to more
@@ -55,20 +56,30 @@ class XBookGroupView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          XBookCell(),
+          _buildWrapGesture(context, XBookCell()),
           SizedBox(height: 8),
-          XBookCell(),
+          _buildWrapGesture(context, XBookCell()),
           SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              XBookItem(),
-              XBookItem(),
-              XBookItem(),
+              _buildWrapGesture(context, XBookItem()),
+              _buildWrapGesture(context, XBookItem()),
+              _buildWrapGesture(context, XBookItem()),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildWrapGesture(BuildContext context, Widget bookWidget) {
+    return GestureDetector(
+      onTap: () {
+        //TODO: jump to book detail
+        print("to book detail");
+      },
+      child: bookWidget,
     );
   }
 }

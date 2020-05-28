@@ -46,16 +46,43 @@ class _XBookViewState extends State<XBookView> {
   Widget _buildChapterHeader(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.only(left: 16),
-      height: 36,
+      padding: EdgeInsets.only(left: 16, right: 16),
+      height: 48,
       color: Theme.of(context).cardColor,
-      alignment: Alignment.centerLeft,
-      child: Text(
-        "Updated at 2020-05-26",
-        style: theme.textTheme.subtitle.copyWith(
-          color: theme.accentColor,
-          fontSize: 14,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Text(
+                  "Updated at 2020-05-26",
+                  style: theme.textTheme.subtitle.copyWith(
+                    color: theme.accentColor,
+                    fontSize: 14,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  "Chapter1999asdasdasdasdasdasd",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.caption.copyWith(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+            color: theme.buttonColor,
+          ),
+        ],
       ),
     );
   }

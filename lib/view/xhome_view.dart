@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xrequest.dart';
+import 'package:app/view/components/xbook_cell.dart';
 import 'package:app/xroutes.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -19,17 +20,18 @@ class _XHomeViewState extends State<XHomeView> {
       appBar: AppBar(
         title: Text("Home"),
       ),
-      body: GestureDetector(
-        child: Center(
-          child: Text("Home"),
-        ),
-        onTap: () async {
-          // XRoutes.push(context, 'XSubView', arguments: ['Home->SubView']);
-          final req = XRequest(method: XRequestMethod.POST, path: "/book", body: {"id": "813cb70a7b7811eab9aff23c92fb9d95"});
-          final resp = await req.send((json) {
-            return MBook.fromJson(json);
-          });
-          print(resp.data);
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (ctx, index) {
+          return Padding(
+            padding: EdgeInsets.only(
+              left: 12,
+              right: 12,
+              top: 4,
+              bottom: 4,
+            ),
+            child: XBookCell(),
+          );
         },
       ),
     );

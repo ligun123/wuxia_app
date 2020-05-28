@@ -26,9 +26,11 @@ class _XBookViewState extends State<XBookView> {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           FlatButton(
+            onPressed: () {},
             child: Text("data"),
           ),
           FlatButton(
+            onPressed: () {},
             child: Text("data"),
           ),
         ],

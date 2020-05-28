@@ -1,4 +1,5 @@
 import 'package:app/view/xbook_view.dart';
+import 'package:app/view/xchapter_view.dart';
 import "package:app/view/xsub_view.dart";
 import "package:app/xbottom_controller.dart";
 import "package:flutter/material.dart";
@@ -38,6 +39,9 @@ class XRoutes {
     },
     "XBookView": (RouteSettings settings) {
       return XBookView();
+    },
+    "XChapterView": (RouteSettings settings) {
+      return XChapterView();
     },
   };
 

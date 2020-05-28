@@ -70,7 +70,7 @@ class _XBookIntroState extends State<XBookIntro> {
   @override
   Widget build(BuildContext context) {
     final body = Container(
-      padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+      padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 16),
       child: _buildText(
           "askldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasd"),
     );

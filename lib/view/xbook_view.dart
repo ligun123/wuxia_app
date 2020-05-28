@@ -1,4 +1,5 @@
 import 'package:app/view/components/xbook_detail_banner.dart';
+import 'package:app/view/components/xbook_item.dart';
 import 'package:app/view/components/xchapter_cell.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,12 @@ class XBookView extends StatefulWidget {
 class _XBookViewState extends State<XBookView> {
   @override
   Widget build(BuildContext context) {
+    final listChildren = [
+      XBookDetailBanner(),
+      XBookIntro(),
+      _buildChapterHeader(context),
+    ];
+    listChildren.addAll(_buildChapters(context));
     return Scaffold(
       appBar: AppBar(
         title: Text("Book Name"),
@@ -26,29 +33,56 @@ class _XBookViewState extends State<XBookView> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: 10 + 1,
-        itemBuilder: (ctx, index) {
-          if (index == 0) {
-            return XBookDetailBanner();
-          } else if (index == 1) {
-            return XBookIntro();
-          } else if (index == 2) {
-            return _buildChapterHeader(context);
-          } else {
-            return XChapterCell();
-          }
-        },
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(listChildren),
+          ),
+          SliverToBoxAdapter(
+            child: XSimpleSection(
+              backgroundColor: Theme.of(context).hoverColor,
+              leadingIcon: SizedBox(width: 12),
+              leading: Text("Maybe you like"),
+              trailing: FlatButton(
+                child: Text("Refresh"),
+                textColor: Theme.of(context).colorScheme.primary,
+                onPressed: () {
+                  //TODO: refresh
+                },
+              ),
+              height: 44,
+            ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 8,
+            ),
+            sliver: SliverGrid.count(
+              crossAxisCount: 3,
+              childAspectRatio: 0.75,
+              children: <Widget>[
+                XBookItem(),
+                XBookItem(),
+                XBookItem(),
+                XBookItem(),
+                XBookItem(),
+                XBookItem(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildChapterHeader(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
+    final body = Container(
       padding: EdgeInsets.only(left: 16, right: 16),
       height: 48,
-      color: Theme.of(context).cardColor,
+      color: Theme.of(context).hoverColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -80,10 +114,29 @@ class _XBookViewState extends State<XBookView> {
           Icon(
             Icons.arrow_forward_ios,
             size: 16,
-            color: theme.buttonColor,
+            color: theme.colorScheme.primary,
           ),
         ],
       ),
     );
+    return GestureDetector(
+      onTap: () {},
+      child: body,
+    );
+  }
+
+  List<Widget> _buildChapters(BuildContext context) {
+    return [
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+      XChapterCell(),
+    ];
   }
 }

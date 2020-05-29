@@ -1,22 +1,16 @@
+import 'package:app/model/mbook_group.dart';
 import 'package:app/model/xmodel.dart';
-import 'mbook.dart';
 
 class MHome extends XModel {
-  List<MBook> hot;
-  List<MBook> newest;
+  List<MBookGroup> bookGroup;
+  MHome({this.bookGroup});
 
-  MHome({
-    this.hot,
-    this.newest,
-  });
-
-  factory MHome.fromJson(Map<String, dynamic> json) => MHome(
-        hot: List<MBook>.from(json["hot"].map((x) => MBook.fromJson(x))),
-        newest: List<MBook>.from(json["new"].map((x) => MBook.fromJson(x))),
+  factory MHome.fromJson(List<Map<String, dynamic>> json) => MHome(
+        bookGroup: List<MBookGroup>.from(
+          json.map((x) => MBookGroup.fromJson(x)),
+        ),
       );
 
-  Map<String, dynamic> toJson() => {
-        "hot": List<dynamic>.from(hot.map((x) => x.toJson())),
-        "new": List<dynamic>.from(newest.map((x) => x.toJson())),
-      };
+  List<Map<String, dynamic>> toJson() =>
+      bookGroup.map((b) => b.toJson()).toList();
 }

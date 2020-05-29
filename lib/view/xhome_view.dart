@@ -1,11 +1,5 @@
-import 'dart:io';
-import 'package:app/model/mbook.dart';
-import 'package:app/utils/xrequest.dart';
 import 'package:app/view/components/xbook_cell.dart';
-import 'package:app/xroutes.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:dio/src/adapters/io_adapter.dart';
 
 class XHomeView extends StatefulWidget {
   XHomeView({Key key}) : super(key: key);

@@ -69,6 +69,7 @@ class XRequest {
       return xresp;
     } catch (e) {
       print(e);
+      print(e.stackTrace);
       return XResponse.fromError(e);
     }
   }

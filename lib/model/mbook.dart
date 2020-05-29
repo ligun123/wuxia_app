@@ -45,8 +45,7 @@ class MBook extends XModel {
         chapterCount: json["chapter_count"],
         readCount: json["read_count"],
         wordCount: json["word_count"],
-        chapters: List<MChapterSimple>.from(
-            json["chapters"].map((x) => MChapterSimple.fromJson(x))),
+        chapters: json["chapters"]?.map((x) => MChapterSimple.fromJson(x))?.toList(),
       );
 
   Map<String, dynamic> toJson() => {

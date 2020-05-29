@@ -56,19 +56,28 @@ class XApi {
     });
   }
 
-  static Future<XResponse<MCategory>> category() {
-    final req =
-        XRequest(path: "/category");
+  static Future<XResponse<List<String>>> categoryGroup() {
+    final req = XRequest(path: "/category/group");
+    return req.send<List<String>>((json) {
+      return (json as List).map((f) => f as String).toList();
+    });
+  }
+
+  static Future<XResponse<MCategory>> categoryBooks({String category}) {
+    final req = XRequest(
+      path: "/category/book",
+      query: {"category": category},
+    );
     return req.send<MCategory>((json) {
       return MCategory.fromJson(json);
     });
   }
 
-  static Future<XResponse<MHome>> home() {
-    final req =
-        XRequest(path: "/home");
+  static Future<XResponse<MHome>> homeGroup() {
+    final req = XRequest(path: "/home/group");
     return req.send<MHome>((json) {
-      return MHome.fromJson(json);
+      final lm = (json as List).map((f) => f as Map<String, dynamic>).toList();
+      return MHome.fromJson(lm);
     });
   }
 }

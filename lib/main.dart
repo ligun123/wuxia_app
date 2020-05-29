@@ -5,7 +5,8 @@ import 'package:app/xroutes.dart';
 
 void main() {
   final option = BaseOptions(
-    baseUrl: "https://wuxianovel.net:8081",
+    // baseUrl: "https://wuxianovel.net:8081",
+    baseUrl: "http://wuxianovel.net:8080",
     connectTimeout: 5000,
     receiveTimeout: 5000,
     sendTimeout: 5000,

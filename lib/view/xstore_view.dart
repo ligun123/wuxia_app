@@ -1,7 +1,11 @@
+import 'package:app/model/mhome.dart';
+import 'package:app/utils/xapi.dart';
+import 'package:app/utils/xresponse.dart';
 import 'package:app/view/components/xbook_group_view.dart';
 import 'package:app/view/components/xcategory_banner.dart';
-import "package:app/xroutes.dart";
+import 'package:app/view/components/xglobal_loading_view.dart';
 import "package:flutter/material.dart";
+import 'package:rxdart/subjects.dart';
 
 class XStoreView extends StatefulWidget {
   XStoreView({Key key}) : super(key: key);
@@ -10,6 +14,17 @@ class XStoreView extends StatefulWidget {
 }
 
 class _XStoreViewState extends State<XStoreView> {
+  XStoreViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _viewModel = XStoreViewModel();
+    _viewModel.fetchHomeGroup();
+    _viewModel.fetchCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,17 +33,62 @@ class _XStoreViewState extends State<XStoreView> {
       ),
       body: Container(
         margin: EdgeInsets.only(top: 12, bottom: 12),
-        child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (ctx, index) {
-            if (index == 0) {
-              return XCategoryBanner();
-            } else {
-              return XBookGroupView();
+        child: StreamBuilder(
+          stream: _viewModel.homeGroupSubj.stream,
+          builder: (ctx, snap) {
+            if (snap.hasError) {
+              return XGlobalNeterrorView(
+                onRefresh: _viewModel.fetchHomeGroup,
+              );
             }
+            if (snap.data == null) {
+              return XGlobalNeterrorView(
+                errorMsg: "Loading...",
+              );
+            }
+            final data = snap.data as MHome;
+            return ListView.builder(
+              itemCount: data.bookGroup.length + 1,
+              itemBuilder: (ctx, index) {
+                if (index == 0) {
+                  return XCategoryBanner();
+                } else {
+                  final groupModel = data.bookGroup[index - 1];
+                  return XBookGroupView(
+                    groupModel: groupModel,
+                  );
+                }
+              },
+            );
           },
         ),
       ),
     );
+  }
+}
+
+class XStoreViewModel {
+  final homeGroupSubj = BehaviorSubject<MHome>();
+
+  final categorySubj = BehaviorSubject<List<String>>();
+
+  Future<XResponse> fetchHomeGroup() async {
+    final resp = await XApi.homeGroup();
+    if (resp.isOK()) {
+      homeGroupSubj.add(resp.data);
+    } else {
+      homeGroupSubj.addError(resp.error);
+    }
+    return resp;
+  }
+
+  Future<XResponse> fetchCategory() async {
+    final resp = await XApi.categoryGroup();
+    if (resp.isOK()) {
+      categorySubj.add(resp.data);
+    } else {
+      categorySubj.addError(resp.error);
+    }
+    return resp;
   }
 }

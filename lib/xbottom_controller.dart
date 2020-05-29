@@ -30,6 +30,7 @@ class _XBottomControllerState extends State<XBottomController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        physics: NeverScrollableScrollPhysics(),
         controller: pageController,
         children: pageViews,
       ),
@@ -61,5 +62,10 @@ class _XBottomControllerState extends State<XBottomController> {
         title: Text("Settings"),
       ),
     ];
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

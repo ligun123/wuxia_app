@@ -1,10 +1,15 @@
+import 'package:app/model/mbook_group.dart';
 import 'package:app/view/components/xbook_cell.dart';
 import 'package:app/view/components/xbook_item.dart';
 import 'package:app/xroutes.dart';
 import "package:flutter/material.dart";
 
 class XBookGroupView extends StatelessWidget {
-  XBookGroupView({Key key}) : super(key: key);
+  final MBookGroup groupModel;
+  XBookGroupView({
+    Key key,
+    this.groupModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

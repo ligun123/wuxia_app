@@ -21,4 +21,8 @@ class MBookGroup extends XModel {
         "sections": section,
         "new": List<dynamic>.from(books.map((x) => x.toJson())),
       };
+
+  MBook getBookAtIndex(int index) {
+    return index < books.length ? books[index] : null;
+  }
 }

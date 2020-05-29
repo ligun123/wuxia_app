@@ -38,7 +38,7 @@ class XBookGroupView extends StatelessWidget {
           ),
           SizedBox(width: 4),
           Text(
-            "Section Title",
+            groupModel.section,
             style: theme.textTheme.subtitle,
           ),
           Spacer(),
@@ -62,16 +62,36 @@ class XBookGroupView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          _buildWrapGesture(context, XBookCell()),
+          _buildWrapGesture(
+              context,
+              XBookCell(
+                bookModel: groupModel.getBookAtIndex(0),
+              )),
           SizedBox(height: 8),
-          _buildWrapGesture(context, XBookCell()),
+          _buildWrapGesture(
+              context,
+              XBookCell(
+                bookModel: groupModel.getBookAtIndex(1),
+              )),
           SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              _buildWrapGesture(context, XBookItem()),
-              _buildWrapGesture(context, XBookItem()),
-              _buildWrapGesture(context, XBookItem()),
+              _buildWrapGesture(
+                  context,
+                  XBookItem(
+                    bookModel: groupModel.getBookAtIndex(2),
+                  )),
+              _buildWrapGesture(
+                  context,
+                  XBookItem(
+                    bookModel: groupModel.getBookAtIndex(3),
+                  )),
+              _buildWrapGesture(
+                  context,
+                  XBookItem(
+                    bookModel: groupModel.getBookAtIndex(4),
+                  )),
             ],
           ),
         ],

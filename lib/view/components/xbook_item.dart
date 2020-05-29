@@ -1,3 +1,4 @@
+import 'package:app/model/mbook.dart';
 import "package:flutter/material.dart";
 
 /**
@@ -5,7 +6,11 @@ import "package:flutter/material.dart";
  */
 
 class XBookItem extends StatelessWidget {
-  XBookItem({Key key}) : super(key: key);
+  final MBook bookModel;
+  XBookItem({
+    Key key,
+    this.bookModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +25,7 @@ class XBookItem extends StatelessWidget {
             height: 100,
           ),
           Text(
-            "The God eater asdasdasdasasdasdasdasdadsd",
-            // style: theme.textTheme.subhead,
+            bookModel.name,
             maxLines: 3,
             softWrap: false,
             overflow: TextOverflow.ellipsis,

@@ -10,10 +10,20 @@ class XApi {
    * 查book详情
    */
   static Future<XResponse<MBook>> book({String bid}) {
-    final req =
-        XRequest(method: XRequestMethod.GET, path: "/book/v1", query: {"id": bid});
+    final req = XRequest(
+        method: XRequestMethod.GET, path: "/book/v1", query: {"id": bid});
     return req.send<MBook>((json) {
       return MBook.fromJson(json);
+    });
+  }
+
+  static Future<XResponse<List<MBook>>> bookMaylike({String bid}) {
+    final req = XRequest(
+        method: XRequestMethod.GET, path: "/book/maylike", query: {"id": bid});
+    return req.send<List<MBook>>((json) {
+      return (json as List).map<MBook>((f) {
+        return MBook.fromJson(f);
+      }).toList();
     });
   }
 
@@ -80,6 +90,4 @@ class XApi {
       return MHome.fromJson(lm);
     });
   }
-
-
 }

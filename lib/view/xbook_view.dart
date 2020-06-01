@@ -1,5 +1,4 @@
 import 'package:app/model/mbook.dart';
-import 'package:app/model/mchapter.dart';
 import 'package:app/utils/xapi.dart';
 import 'package:app/utils/xresponse.dart';
 import 'package:app/view/components/xbook_detail_banner.dart';
@@ -24,6 +23,10 @@ class _XBookViewState extends State<XBookView> {
     super.initState();
     viewModel = XBookViewModel(bookId: widget.bookId);
     viewModel.fetchBook();
+
+    viewModel.fetchBookMaylike().then((resp) {
+      print(resp.data.toString());
+    });
   }
 
   @override
@@ -180,6 +183,7 @@ class _XBookViewState extends State<XBookView> {
 class XBookViewModel {
   final String bookId;
   final bookSubj = BehaviorSubject<MBook>();
+  final bookMaylikeSubj = BehaviorSubject<List<MBook>>();
 
   XBookViewModel({@required this.bookId});
 
@@ -189,6 +193,17 @@ class XBookViewModel {
         bookSubj.add(resp.data);
       } else {
         bookSubj.addError(resp.error);
+      }
+      return resp;
+    });
+  }
+
+  Future<XResponse> fetchBookMaylike() {
+    return XApi.bookMaylike(bid: this.bookId).then((resp) {
+      if (resp.isOK()) {
+        bookMaylikeSubj.add(resp.data);
+      } else {
+        bookMaylikeSubj.addError(resp.error);
       }
       return resp;
     });

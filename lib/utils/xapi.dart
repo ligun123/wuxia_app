@@ -11,7 +11,7 @@ class XApi {
    */
   static Future<XResponse<MBook>> book({String bid}) {
     final req =
-        XRequest(method: XRequestMethod.POST, path: "/book", body: {"id": bid});
+        XRequest(method: XRequestMethod.GET, path: "/book/v1", query: {"id": bid});
     return req.send<MBook>((json) {
       return MBook.fromJson(json);
     });
@@ -80,4 +80,6 @@ class XApi {
       return MHome.fromJson(lm);
     });
   }
+
+
 }

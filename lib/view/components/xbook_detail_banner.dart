@@ -1,12 +1,10 @@
+import 'package:app/model/mbook.dart';
 import 'package:flutter/material.dart';
 
-class XBookDetailBanner extends StatefulWidget {
-  XBookDetailBanner({Key key}) : super(key: key);
+class XBookDetailBanner extends StatelessWidget {
+  final MBook book;
+  XBookDetailBanner({Key key, this.book}) : super(key: key);
 
-  _XBookDetailBannerState createState() => _XBookDetailBannerState();
-}
-
-class _XBookDetailBannerState extends State<XBookDetailBanner> {
   @override
   Widget build(BuildContext context) {
     final bookHeight = 100.0;
@@ -30,23 +28,18 @@ class _XBookDetailBannerState extends State<XBookDetailBanner> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "halloworldhalloworldhalloworldhalloworldhalloworldhallo worldhallo worldhallo world",
+                  book.name,
                   style: textTheme.subtitle.copyWith(fontSize: 16),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "Auther Name",
+                  book.author,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "Category",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  "Status",
+                  book.category,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -60,7 +53,8 @@ class _XBookDetailBannerState extends State<XBookDetailBanner> {
 }
 
 class XBookIntro extends StatefulWidget {
-  XBookIntro({Key key}) : super(key: key);
+  final String intro;
+  XBookIntro({Key key, this.intro}) : super(key: key);
 
   _XBookIntroState createState() => _XBookIntroState();
 }
@@ -71,8 +65,7 @@ class _XBookIntroState extends State<XBookIntro> {
   Widget build(BuildContext context) {
     final body = Container(
       padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 16),
-      child: _buildText(
-          "askldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasdaskldjaklsdjklasd"),
+      child: _buildText(widget.intro),
     );
     return GestureDetector(
       onTap: () {

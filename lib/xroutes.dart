@@ -4,7 +4,6 @@ import "package:app/view/xsub_view.dart";
 import "package:app/xbottom_controller.dart";
 import "package:flutter/material.dart";
 
-
 typedef Widget XWidgetBuilder(RouteSettings settings);
 
 /// 集中管理route跳转
@@ -38,7 +37,9 @@ class XRoutes {
       );
     },
     "XBookView": (RouteSettings settings) {
-      return XBookView();
+      return XBookView(
+        bookId: _argOf(settings.arguments, 0),
+      );
     },
     "XChapterView": (RouteSettings settings) {
       return XChapterView();

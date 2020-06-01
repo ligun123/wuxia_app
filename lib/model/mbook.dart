@@ -15,6 +15,7 @@ class MBook extends XModel {
   int readCount;
   int wordCount;
   List<MChapterSimple> chapters;
+  MChapterSimple latestChapter;
 
   MBook({
     this.id,
@@ -30,6 +31,7 @@ class MBook extends XModel {
     this.readCount,
     this.wordCount,
     this.chapters,
+    this.latestChapter,
   });
 
   factory MBook.fromJson(Map<String, dynamic> json) => MBook(
@@ -45,7 +47,13 @@ class MBook extends XModel {
         chapterCount: json["chapter_count"],
         readCount: json["read_count"],
         wordCount: json["word_count"],
-        chapters: json["chapters"]?.map((x) => MChapterSimple.fromJson(x))?.toList(),
+        chapters: json["chapters"] == null
+            ? null
+            : List<MChapterSimple>.from(
+                json["chapters"].map((x) => MChapterSimple.fromJson(x))),
+        latestChapter: json["latestChapter"] == null
+            ? null
+            : MChapterSimple.fromJson(json["latestChapter"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,6 +70,6 @@ class MBook extends XModel {
         "read_count": readCount,
         "word_count": wordCount,
         "chapters": List<dynamic>.from(chapters.map((x) => x.toJson())),
+        "latestChapter": latestChapter.toJson(),
       };
-
 }

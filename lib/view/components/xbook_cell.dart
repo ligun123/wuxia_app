@@ -3,15 +3,17 @@ import "package:flutter/material.dart";
 
 class XBookCell extends StatelessWidget {
   final MBook bookModel;
+  final void Function(MBook book) onTap;
   XBookCell({
     Key key,
     this.bookModel,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
+    Widget body = SizedBox(
       height: 100,
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -53,5 +55,14 @@ class XBookCell extends StatelessWidget {
         ],
       ),
     );
+    if (onTap != null) {
+      body = GestureDetector(
+        onTap: () {
+          onTap(bookModel);
+        },
+        child: body,
+      );
+    }
+    return body;
   }
 }

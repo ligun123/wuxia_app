@@ -81,6 +81,9 @@ class XRequest {
       client.badCertificateCallback = (cert, host, port) {
         return true;
       };
+      client.findProxy = (url) {
+        return "PROXY 192.168.8.11:8888";
+      };
       return client;
     };
   }

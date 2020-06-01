@@ -7,14 +7,16 @@ import "package:flutter/material.dart";
 
 class XBookItem extends StatelessWidget {
   final MBook bookModel;
+  final void Function(MBook book) onTap;
   XBookItem({
     Key key,
     this.bookModel,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    Widget body = SizedBox(
       width: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,6 +35,15 @@ class XBookItem extends StatelessWidget {
         ],
       ),
     );
+    if (onTap != null) {
+      body = GestureDetector(
+        onTap: () {
+          onTap(bookModel);
+        },
+        child: body,
+      );
+    }
+    return body;
   }
 }
 

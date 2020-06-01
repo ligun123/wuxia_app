@@ -1,3 +1,4 @@
+import 'package:app/model/mbook.dart';
 import 'package:app/model/mbook_group.dart';
 import 'package:app/view/components/xbook_cell.dart';
 import 'package:app/view/components/xbook_item.dart';
@@ -62,36 +63,41 @@ class XBookGroupView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          _buildWrapGesture(
-              context,
-              XBookCell(
-                bookModel: groupModel.getBookAtIndex(0),
-              )),
+          XBookCell(
+            bookModel: groupModel.getBookAtIndex(0),
+            onTap: (book) {
+              onBookTap(context, book);
+            },
+          ),
           SizedBox(height: 8),
-          _buildWrapGesture(
-              context,
-              XBookCell(
-                bookModel: groupModel.getBookAtIndex(1),
-              )),
+          XBookCell(
+            bookModel: groupModel.getBookAtIndex(1),
+            onTap: (book) {
+              onBookTap(context, book);
+            },
+          ),
           SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              _buildWrapGesture(
-                  context,
-                  XBookItem(
-                    bookModel: groupModel.getBookAtIndex(2),
-                  )),
-              _buildWrapGesture(
-                  context,
-                  XBookItem(
-                    bookModel: groupModel.getBookAtIndex(3),
-                  )),
-              _buildWrapGesture(
-                  context,
-                  XBookItem(
-                    bookModel: groupModel.getBookAtIndex(4),
-                  )),
+              XBookItem(
+                bookModel: groupModel.getBookAtIndex(2),
+                onTap: (book) {
+                  onBookTap(context, book);
+                },
+              ),
+              XBookItem(
+                bookModel: groupModel.getBookAtIndex(3),
+                onTap: (book) {
+                  onBookTap(context, book);
+                },
+              ),
+              XBookItem(
+                bookModel: groupModel.getBookAtIndex(4),
+                onTap: (book) {
+                  onBookTap(context, book);
+                },
+              ),
             ],
           ),
         ],
@@ -99,13 +105,7 @@ class XBookGroupView extends StatelessWidget {
     );
   }
 
-  Widget _buildWrapGesture(BuildContext context, Widget bookWidget) {
-    return GestureDetector(
-      onTap: () {
-        //TODO: jump to book detail
-        XRoutes.push(context, "XBookView");
-      },
-      child: bookWidget,
-    );
+  void onBookTap(BuildContext context, MBook book) {
+    XRoutes.push(context, "XBookView", arguments: [book.uid]);
   }
 }

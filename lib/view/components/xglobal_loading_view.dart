@@ -30,24 +30,26 @@ class XGlobalNeterrorView extends StatelessWidget {
           SizedBox(
             height: 14,
           ),
-          GestureDetector(
-            onTap: onRefresh,
-            child: Container(
-              width: 100,
-              height: 30,
-              child: Center(
-                child: Text(
-                  "Retry",
-                  style: _XGlobalNeterrorViewStyle.buttonTextStyle(),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xFF8E99A0), width: 1),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          )
+          onRefresh == null
+              ? Container()
+              : GestureDetector(
+                  onTap: onRefresh,
+                  child: Container(
+                    width: 100,
+                    height: 30,
+                    child: Center(
+                      child: Text(
+                        "Retry",
+                        style: _XGlobalNeterrorViewStyle.buttonTextStyle(),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Color(0xFF8E99A0), width: 1),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                )
         ],
       ),
     );

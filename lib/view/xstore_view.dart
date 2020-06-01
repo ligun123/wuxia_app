@@ -21,11 +21,10 @@ class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMi
 
   @override
   void initState() {
-    print("_XStoreViewState initState");
     super.initState();
 
     _viewModel = XStoreViewModel();
-    _viewModel.fetchHomeGroup();
+    _viewModel.fetchHome();
     _viewModel.fetchCategory();
   }
 
@@ -42,7 +41,7 @@ class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMi
           builder: (ctx, snap) {
             if (snap.hasError) {
               return XGlobalNeterrorView(
-                onRefresh: _viewModel.fetchHomeGroup,
+                onRefresh: _viewModel.fetchHome,
               );
             }
             if (snap.data == null) {
@@ -73,7 +72,6 @@ class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMi
 
   @override
   void dispose() {
-    print("_XStoreViewState dispose");
     super.dispose();
   }
 }
@@ -83,8 +81,8 @@ class XStoreViewModel {
 
   final categorySubj = BehaviorSubject<List<String>>();
 
-  Future<XResponse> fetchHomeGroup() async {
-    final resp = await XApi.homeGroup();
+  Future<XResponse> fetchHome() async {
+    final resp = await XApi.home();
     if (resp.isOK()) {
       homeGroupSubj.add(resp.data);
     } else {

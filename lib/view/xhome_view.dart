@@ -16,7 +16,6 @@ class _XHomeViewState extends State<XHomeView> with AutomaticKeepAliveClientMixi
   
   @override
   void initState() {
-    print("_XHomeViewState initState");
     super.initState();
   }
   @override
@@ -44,7 +43,6 @@ class _XHomeViewState extends State<XHomeView> with AutomaticKeepAliveClientMixi
 
   @override
   void dispose() {
-    print("_XHomeViewState dispose");
     super.dispose();
   }
 }

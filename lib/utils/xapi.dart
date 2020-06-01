@@ -63,9 +63,9 @@ class XApi {
     });
   }
 
-  static Future<XResponse<MCategory>> categoryBooks({String category}) {
+  static Future<XResponse<MCategory>> categoryList({String category}) {
     final req = XRequest(
-      path: "/category/book",
+      path: "/category/list",
       query: {"category": category},
     );
     return req.send<MCategory>((json) {
@@ -73,8 +73,8 @@ class XApi {
     });
   }
 
-  static Future<XResponse<MHome>> homeGroup() {
-    final req = XRequest(path: "/home/group");
+  static Future<XResponse<MHome>> home() {
+    final req = XRequest(path: "/home/v1");
     return req.send<MHome>((json) {
       final lm = (json as List).map((f) => f as Map<String, dynamic>).toList();
       return MHome.fromJson(lm);

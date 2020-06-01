@@ -7,7 +7,18 @@ class XHomeView extends StatefulWidget {
   _XHomeViewState createState() => _XHomeViewState();
 }
 
-class _XHomeViewState extends State<XHomeView> {
+class _XHomeViewState extends State<XHomeView> with AutomaticKeepAliveClientMixin {
+
+
+  @override
+  bool get wantKeepAlive => true;
+
+  
+  @override
+  void initState() {
+    print("_XHomeViewState initState");
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +26,7 @@ class _XHomeViewState extends State<XHomeView> {
         title: Text("Home"),
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: 0,
         itemBuilder: (ctx, index) {
           return Padding(
             padding: EdgeInsets.only(
@@ -29,5 +40,11 @@ class _XHomeViewState extends State<XHomeView> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    print("_XHomeViewState dispose");
+    super.dispose();
   }
 }

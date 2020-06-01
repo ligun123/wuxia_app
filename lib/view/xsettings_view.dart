@@ -7,7 +7,12 @@ class XSettingsView extends StatefulWidget {
   _XSettingsViewState createState() => _XSettingsViewState();
 }
 
-class _XSettingsViewState extends State<XSettingsView> {
+class _XSettingsViewState extends State<XSettingsView> with AutomaticKeepAliveClientMixin {
+
+  @override
+  bool get wantKeepAlive => true;
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -13,11 +13,15 @@ class XStoreView extends StatefulWidget {
   _XStoreViewState createState() => _XStoreViewState();
 }
 
-class _XStoreViewState extends State<XStoreView> {
+class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMixin {
   XStoreViewModel _viewModel;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
+    print("_XStoreViewState initState");
     super.initState();
 
     _viewModel = XStoreViewModel();
@@ -64,6 +68,13 @@ class _XStoreViewState extends State<XStoreView> {
         ),
       ),
     );
+  }
+
+
+  @override
+  void dispose() {
+    print("_XStoreViewState dispose");
+    super.dispose();
   }
 }
 

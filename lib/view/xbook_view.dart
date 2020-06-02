@@ -5,6 +5,7 @@ import 'package:app/view/components/xbook_detail_banner.dart';
 import 'package:app/view/components/xbook_item.dart';
 import 'package:app/view/components/xchapter_cell.dart';
 import 'package:app/view/components/xglobal_loading_view.dart';
+import 'package:app/xroutes.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -23,10 +24,7 @@ class _XBookViewState extends State<XBookView> {
     super.initState();
     viewModel = XBookViewModel(bookId: widget.bookId);
     viewModel.fetchBook();
-
-    viewModel.fetchBookMaylike().then((resp) {
-      print(resp.data.toString());
-    });
+    viewModel.fetchBookMaylike();
   }
 
   @override
@@ -86,31 +84,50 @@ class _XBookViewState extends State<XBookView> {
                   trailing: FlatButton(
                     child: Text("Refresh"),
                     textColor: Theme.of(context).colorScheme.primary,
-                    onPressed: () {
-                      //TODO: refresh
-                    },
+                    onPressed: viewModel.fetchBookMaylike,
                   ),
                   height: 44,
                 ),
               ),
-              SliverPadding(
-                padding: EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  top: 8,
-                ),
-                sliver: SliverGrid.count(
-                  crossAxisCount: 3,
-                  childAspectRatio: 0.75,
-                  children: <Widget>[
-                    XBookItem(),
-                    XBookItem(),
-                    XBookItem(),
-                    XBookItem(),
-                    XBookItem(),
-                    XBookItem(),
-                  ],
-                ),
+              StreamBuilder(
+                stream: viewModel.bookMaylikeSubj.stream,
+                builder: (ctx, AsyncSnapshot<List<MBook>> snap) {
+                  if (snap.hasError) {
+                    return SliverToBoxAdapter(
+                      child: XGlobalNeterrorView(
+                        onRefresh: viewModel.fetchBookMaylike,
+                      ),
+                    );
+                  }
+                  if (snap.data == null) {
+                    return SliverToBoxAdapter(
+                      child: XGlobalNeterrorView(
+                        errorMsg: "Loading...",
+                      ),
+                    );
+                  }
+                  return SliverPadding(
+                    padding: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      top: 8,
+                    ),
+                    sliver: SliverGrid.count(
+                      crossAxisCount: 3,
+                      childAspectRatio: 0.75,
+                      children: snap.data
+                          .map<Widget>(
+                            (f) => XBookItem(
+                              bookModel: f,
+                              onTap: (book) {
+                                XRoutes.push(context, "XBookView", arguments: [book.uid]);
+                              },
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  );
+                },
               ),
             ],
           );
@@ -179,6 +196,19 @@ class _XBookViewState extends State<XBookView> {
     );
   }
 }
+
+// class XBookMaylikeView extends StatelessWidget {
+//   final List<MBook> books;
+//   final void Function() onRefresh;
+//   const XBookMaylikeView({Key key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: child,
+//     );
+//   }
+// }
 
 class XBookViewModel {
   final String bookId;

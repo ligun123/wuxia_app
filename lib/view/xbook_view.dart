@@ -234,7 +234,9 @@ class _XBookViewState extends State<XBookView> {
 
   void addToBookshelfTap() async {
     final book = viewModel.bookSubj.value;
-    XGlobalInherited.of(context).bookshelf.add(book);
+    setState(() {
+      XGlobalInherited.of(context).bookshelf.add(book);
+    });
   }
 
   void readNowTap() {

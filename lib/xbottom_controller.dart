@@ -23,7 +23,6 @@ class _XBottomControllerState extends State<XBottomController> {
       XSettingsView(),
     ]);
     pageController = PageController(initialPage: pageIndex);
-
   }
 
   @override

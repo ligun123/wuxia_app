@@ -14,6 +14,7 @@ class XGlobalInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(XGlobalInherited oldWidget) {
+    bookshelf = oldWidget.bookshelf;    //避免重新build时bookshelf丢失
     return true;
   }
 }

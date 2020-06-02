@@ -186,10 +186,11 @@ class _XBookViewState extends State<XBookView> {
   }
 
   Widget _buildBottomBar(BuildContext context) {
-    final hasBook = XGlobalInherited.of(context).bookshelf.hasBook(MBook(uid: widget.bookId));
+    final hasBook = XGlobalInherited.of(context)
+        .bookshelf
+        .hasBook(MBook(uid: widget.bookId));
     return Container(
       height: 36,
-      // color: Colors.black,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisSize: MainAxisSize.max,
@@ -200,7 +201,6 @@ class _XBookViewState extends State<XBookView> {
               textColor: Colors.white,
               onPressed: hasBook ? null : addToBookshelfTap,
               child: Text("Add To Bookshelf"),
-              
             ),
           ),
           Expanded(
@@ -215,12 +215,10 @@ class _XBookViewState extends State<XBookView> {
     );
   }
 
-
   void addToBookshelfTap() async {
     final book = viewModel.bookSubj.value;
     XGlobalInherited.of(context).bookshelf.add(book);
   }
-
 
   void readNowTap() {
     final book = viewModel.bookSubj.value;

@@ -23,15 +23,18 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
-    return XGlobalInherited(child: MaterialApp(
-      initialRoute: 'XBottomController',
-      onGenerateRoute: XRoutes.routeGenerater,
-      onUnknownRoute: XRoutes.unknownGenerater,
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-      themeMode: ThemeMode.light,
-    ),);
+    return XGlobalInherited(
+      child: MaterialApp(
+        initialRoute: 'XBottomController',
+        onGenerateRoute: XRoutes.routeGenerater,
+        onUnknownRoute: XRoutes.unknownGenerater,
+        theme: ThemeData(brightness: Brightness.light),
+        darkTheme: ThemeData(brightness: Brightness.dark),
+        themeMode: ThemeMode.light,
+      ),
+    );
   }
 }

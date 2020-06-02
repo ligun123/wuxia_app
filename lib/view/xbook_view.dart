@@ -133,6 +133,23 @@ class _XBookViewState extends State<XBookView> {
     ];
     listChildren
         .addAll(book.chapters.map((c) => XChapterCell(chapter: c)).toList());
+    if (book.chapters.length >= 10) {
+      listChildren.add(
+        GestureDetector(
+          onTap: () {
+            //TODO: -> chapter menu view
+            print("->menu...");
+          },
+          child: Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            padding: EdgeInsets.only(left: 16, right: 16),
+            height: 32,
+            alignment: Alignment.centerLeft,
+            child: Text("..."),
+          ),
+        ),
+      );
+    }
     return listChildren;
   }
 

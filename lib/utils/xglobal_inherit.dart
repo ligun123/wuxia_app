@@ -6,7 +6,7 @@ class XGlobalInherited extends InheritedWidget {
 
   final Widget child;
 
-  MBookshelf bookshelf = MBookshelf();
+  final MBookshelf bookshelf = MBookshelf();
 
   static XGlobalInherited of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<XGlobalInherited>();
@@ -14,7 +14,7 @@ class XGlobalInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(XGlobalInherited oldWidget) {
-    bookshelf = oldWidget.bookshelf;    //避免重新build时bookshelf丢失
+    bookshelf.books = oldWidget.bookshelf.books;    //避免重新build时bookshelf丢失
     return true;
   }
 }

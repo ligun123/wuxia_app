@@ -79,6 +79,12 @@ class XRoutes {
     return Navigator.of(context).pushNamed<T>(routeName, arguments: arguments);
   }
 
+  static Future<T> pushReplacement<T extends Object>(
+      BuildContext context, String routeName,
+      {List arguments}) {
+    return Navigator.of(context).pushReplacementNamed(routeName, arguments: arguments);
+  }
+
   /// 通过传入页面的Type来实现跳转
   /// eg:
   /// pushT(context, XMsgReplyView);

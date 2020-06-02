@@ -1,5 +1,6 @@
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xapi.dart';
+import 'package:app/utils/xdb_manager.dart';
 import 'package:app/utils/xresponse.dart';
 import 'package:app/view/components/xbook_detail_banner.dart';
 import 'package:app/view/components/xbook_item.dart';
@@ -38,24 +39,7 @@ class _XBookViewState extends State<XBookView> {
           },
         ),
       ),
-      bottomNavigationBar: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          MaterialButton(
-            color: Colors.pinkAccent,
-            textColor: Colors.white,
-            onPressed: () {},
-            child: Text("Add To Bookshelf"),
-            minWidth: MediaQuery.of(context).size.width/2,
-          ),
-          MaterialButton(
-            textColor: Colors.pinkAccent,
-            onPressed: () {},
-            child: Text("Read Now"),
-            minWidth: MediaQuery.of(context).size.width/2,
-          ),
-        ],
-      ),
+      bottomNavigationBar: _buildBottomBar(context),
       body: StreamBuilder(
         stream: viewModel.bookSubj.stream,
         builder: (ctx, AsyncSnapshot<MBook> snap) {
@@ -70,7 +54,6 @@ class _XBookViewState extends State<XBookView> {
               onRefresh: null,
             );
           }
-
           return CustomScrollView(
             slivers: <Widget>[
               SliverList(
@@ -125,7 +108,8 @@ class _XBookViewState extends State<XBookView> {
                             (f) => XBookItem(
                               bookModel: f,
                               onTap: (book) {
-                                XRoutes.push(context, "XBookView", arguments: [book.uid]);
+                                XRoutes.pushReplacement(context, "XBookView",
+                                    arguments: [book.uid]);
                               },
                             ),
                           )
@@ -200,6 +184,35 @@ class _XBookViewState extends State<XBookView> {
       child: body,
     );
   }
+}
+
+Widget _buildBottomBar(BuildContext context) {
+  return Container(
+    height: 36,
+    // color: Colors.black,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+    mainAxisSize: MainAxisSize.max,
+    children: <Widget>[
+      Expanded(
+        child: FlatButton(
+          color: Colors.pinkAccent,
+          textColor: Colors.white,
+          onPressed: () {
+          },
+          child: Text("Add To Bookshelf"),
+        ),
+      ),
+      Expanded(
+        child: FlatButton(
+          textColor: Colors.pinkAccent,
+          onPressed: () {},
+          child: Text("Read Now"),
+        ),
+      ),
+    ],
+  ),
+  );
 }
 
 // class XBookMaylikeView extends StatelessWidget {

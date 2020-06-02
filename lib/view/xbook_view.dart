@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xapi.dart';
-import 'package:app/utils/xdb_manager.dart';
+import 'package:app/utils/xglobal_inherit.dart';
 import 'package:app/utils/xresponse.dart';
 import 'package:app/view/components/xbook_detail_banner.dart';
 import 'package:app/view/components/xbook_item.dart';
@@ -187,6 +186,7 @@ class _XBookViewState extends State<XBookView> {
   }
 
   Widget _buildBottomBar(BuildContext context) {
+    final hasBook = XGlobalInherited.of(context).bookshelf.hasBook(MBook(uid: widget.bookId));
     return Container(
       height: 36,
       // color: Colors.black,
@@ -198,14 +198,15 @@ class _XBookViewState extends State<XBookView> {
             child: FlatButton(
               color: Colors.pinkAccent,
               textColor: Colors.white,
-              onPressed: viewModel.addToBookshelfTap,
+              onPressed: hasBook ? null : addToBookshelfTap,
               child: Text("Add To Bookshelf"),
+              
             ),
           ),
           Expanded(
             child: FlatButton(
               textColor: Colors.pinkAccent,
-              onPressed: viewModel.readNowTap,
+              onPressed: readNowTap,
               child: Text("Read Now"),
             ),
           ),
@@ -214,6 +215,17 @@ class _XBookViewState extends State<XBookView> {
     );
   }
 
+
+  void addToBookshelfTap() async {
+    final book = viewModel.bookSubj.value;
+    XGlobalInherited.of(context).bookshelf.add(book);
+  }
+
+
+  void readNowTap() {
+    final book = viewModel.bookSubj.value;
+    XGlobalInherited.of(context).bookshelf.add(book);
+  }
 }
 
 class XBookViewModel {
@@ -244,18 +256,4 @@ class XBookViewModel {
       return resp;
     });
   }
-
-  void addToBookshelfTap() async {
-    final key = "bookshelf";
-    await XDBManager.shared.openDB();
-    String shelfString = await XDBManager.shared.getValue(key);
-    final List shelfJson = jsonDecode(shelfString ?? "[]");
-    final book = this.bookSubj.value;
-    shelfJson.add(book.toJson());
-    shelfString = jsonEncode(shelfJson);
-    XDBManager.shared.setKeyAndValue(key, shelfString);
-  }
-
-
-  void readNowTap() {}
 }

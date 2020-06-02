@@ -1,4 +1,4 @@
-import 'package:app/model/mbook.dart';
+import 'package:app/model/MBookshelf.dart';
 import 'package:flutter/material.dart';
 
 class XGlobalInherited extends InheritedWidget {
@@ -6,7 +6,7 @@ class XGlobalInherited extends InheritedWidget {
 
   final Widget child;
 
-  List<MBook> bookshelf;
+  MBookshelf bookshelf = MBookshelf();
 
   static XGlobalInherited of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<XGlobalInherited>();
@@ -15,29 +15,5 @@ class XGlobalInherited extends InheritedWidget {
   @override
   bool updateShouldNotify(XGlobalInherited oldWidget) {
     return true;
-  }
-
-  /**
-   * bookshelf
-   * .add
-   * .subtract
-   * .update
-   */
-
-  bookshelfAdd(MBook book) {
-    bookshelf.add(book);
-  }
-
-  bookshelfSubtract(MBook book) {
-    bookshelf.removeWhere((test) {
-      return test.uid == book.uid;
-    });
-  }
-
-  bookshelfUpdate(MBook book) {
-    final index = bookshelf.indexWhere((test) {
-      return test.uid == book.uid;
-    });
-    bookshelf[index] = book;
   }
 }

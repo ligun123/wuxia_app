@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xdb_manager.dart';
+import 'package:app/utils/xglobal_inherit.dart';
 import 'package:app/view/components/xbook_cell.dart';
 import 'package:flutter/material.dart';
 
@@ -16,32 +17,29 @@ class _XHomeViewState extends State<XHomeView>
   @override
   bool get wantKeepAlive => true;
 
-  List<MBook> bookshelf = [];
-
   @override
   void initState() {
     super.initState();
     XDBManager.shared.openDB();
     XDBManager.shared.getValue("bookshelf").then((onValue) {
       final List jsonList = jsonDecode(onValue ?? "[]");
+      final bookList = jsonList.map<MBook>((f) => MBook.fromJson(f)).toList();
       setState(() {
-        final bookList = jsonList.map<MBook>((f) => MBook.fromJson(f)).toList();
-        setState(() {
-          bookshelf = bookList;
-        });
+        XGlobalInherited.of(context).bookshelf.books = bookList;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final bookshelf = XGlobalInherited.of(context).bookshelf.books;
     super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
       ),
       body: ListView.builder(
-        itemCount: bookshelf.length,
+        itemCount: bookshelf?.length ?? 0,
         itemBuilder: (ctx, index) {
           return Padding(
             padding: EdgeInsets.only(
@@ -52,6 +50,9 @@ class _XHomeViewState extends State<XHomeView>
             ),
             child: XBookCell(
               bookModel: bookshelf[index],
+              onTap: (book) {
+                //TODO: read now
+              },
             ),
           );
         },

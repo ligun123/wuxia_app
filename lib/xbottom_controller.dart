@@ -51,7 +51,7 @@ class _XBottomControllerState extends State<XBottomController> {
     return [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
-        title: Text("Home"),
+        title: Text("Bookshelf"),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.store),

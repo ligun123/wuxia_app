@@ -41,13 +41,18 @@ class _XBookViewState extends State<XBookView> {
       bottomNavigationBar: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          FlatButton(
+          MaterialButton(
+            color: Colors.pinkAccent,
+            textColor: Colors.white,
             onPressed: () {},
-            child: Text("data"),
+            child: Text("Add To Bookshelf"),
+            minWidth: MediaQuery.of(context).size.width/2,
           ),
-          FlatButton(
+          MaterialButton(
+            textColor: Colors.pinkAccent,
             onPressed: () {},
-            child: Text("data"),
+            child: Text("Read Now"),
+            minWidth: MediaQuery.of(context).size.width/2,
           ),
         ],
       ),

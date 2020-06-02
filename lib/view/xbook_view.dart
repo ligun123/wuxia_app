@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xapi.dart';
 import 'package:app/utils/xdb_manager.dart';
@@ -184,49 +185,36 @@ class _XBookViewState extends State<XBookView> {
       child: body,
     );
   }
-}
 
-Widget _buildBottomBar(BuildContext context) {
-  return Container(
-    height: 36,
-    // color: Colors.black,
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-    mainAxisSize: MainAxisSize.max,
-    children: <Widget>[
-      Expanded(
-        child: FlatButton(
-          color: Colors.pinkAccent,
-          textColor: Colors.white,
-          onPressed: () {
-          },
-          child: Text("Add To Bookshelf"),
-        ),
+  Widget _buildBottomBar(BuildContext context) {
+    return Container(
+      height: 36,
+      // color: Colors.black,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Expanded(
+            child: FlatButton(
+              color: Colors.pinkAccent,
+              textColor: Colors.white,
+              onPressed: viewModel.addToBookshelfTap,
+              child: Text("Add To Bookshelf"),
+            ),
+          ),
+          Expanded(
+            child: FlatButton(
+              textColor: Colors.pinkAccent,
+              onPressed: viewModel.readNowTap,
+              child: Text("Read Now"),
+            ),
+          ),
+        ],
       ),
-      Expanded(
-        child: FlatButton(
-          textColor: Colors.pinkAccent,
-          onPressed: () {},
-          child: Text("Read Now"),
-        ),
-      ),
-    ],
-  ),
-  );
+    );
+  }
+
 }
-
-// class XBookMaylikeView extends StatelessWidget {
-//   final List<MBook> books;
-//   final void Function() onRefresh;
-//   const XBookMaylikeView({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: child,
-//     );
-//   }
-// }
 
 class XBookViewModel {
   final String bookId;
@@ -256,4 +244,18 @@ class XBookViewModel {
       return resp;
     });
   }
+
+  void addToBookshelfTap() async {
+    final key = "bookshelf";
+    await XDBManager.shared.openDB();
+    String shelfString = await XDBManager.shared.getValue(key);
+    final List shelfJson = jsonDecode(shelfString ?? "[]");
+    final book = this.bookSubj.value;
+    shelfJson.add(book.toJson());
+    shelfString = jsonEncode(shelfJson);
+    XDBManager.shared.setKeyAndValue(key, shelfString);
+  }
+
+
+  void readNowTap() {}
 }

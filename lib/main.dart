@@ -1,4 +1,5 @@
 import 'package:app/utils/xdb_manager.dart';
+import 'package:app/utils/xglobal_inherit.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:app/utils/xrequest.dart';
@@ -24,13 +25,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return XGlobalInherited(child: MaterialApp(
       initialRoute: 'XBottomController',
       onGenerateRoute: XRoutes.routeGenerater,
       onUnknownRoute: XRoutes.unknownGenerater,
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: ThemeMode.light,
-    );
+    ),);
   }
 }

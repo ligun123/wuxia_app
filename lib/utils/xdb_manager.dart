@@ -23,7 +23,6 @@ class XDBManager {
   openDB() async {
     if (_db == null || _db.isOpen == false) {
       final path = await dbPath();
-      print('sqlite: $path');
       _db = await openDatabase(path, version: 1, onCreate: (db, version) async {
         final kv = '''
           CREATE TABLE IF NOT EXISTS $_kv (
@@ -80,7 +79,6 @@ class XDBManager {
     final dirPath = await getDatabasesPath();
     await Directory(dirPath).create(recursive: true);
     final dbPath = dirPath + (dirPath.endsWith('/') ? '.cache' : '/.cache');
-    print('kvstorage path: ' + dbPath);
     return dbPath;
   }
 

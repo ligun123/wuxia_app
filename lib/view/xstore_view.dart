@@ -30,6 +30,7 @@ class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Store"),

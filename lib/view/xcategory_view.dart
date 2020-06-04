@@ -1,6 +1,8 @@
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xapi.dart';
+import 'package:app/utils/xresponse.dart';
 import 'package:app/view/components/xbook_cell.dart';
+import 'package:app/view/components/xglobal_loading_view.dart';
 import 'package:app/xroutes.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +14,17 @@ class XCategoryView extends StatefulWidget {
 }
 
 class _XCategoryViewState extends State<XCategoryView> {
-  List<MBook> books;
+  XResponse<List<MBook>> _resp;
   @override
   void initState() {
     super.initState();
+    refresh();
+  }
+
+  void refresh() {
     XApi.categoryList(category: widget.category).then((resp) {
       setState(() {
-        books = resp.data;
+        _resp = resp;
       });
     });
   }
@@ -29,8 +35,22 @@ class _XCategoryViewState extends State<XCategoryView> {
       appBar: AppBar(
         title: Text(widget.category),
       ),
-      body: ListView(
-        children: books
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    if (_resp == null) {
+      return XGlobalNeterrorView(
+        errorMsg: "Loading...",
+      );
+    } else if (_resp.error != null) {
+      return XGlobalNeterrorView(
+        onRefresh: refresh,
+      );
+    } else {
+      return ListView(
+        children: _resp.data
             .map((f) => Padding(
                   padding: EdgeInsets.only(
                     left: 12,
@@ -44,8 +64,8 @@ class _XCategoryViewState extends State<XCategoryView> {
                   ),
                 ))
             .toList(),
-      ),
-    );
+      );
+    }
   }
 
   void bookCellTap(MBook book) {

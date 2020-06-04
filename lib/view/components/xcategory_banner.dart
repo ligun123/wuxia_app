@@ -68,6 +68,4 @@ class XCategoryItem extends StatelessWidget {
       child: body,
     );
   }
-
-  Widget _buildImage() {}
 }

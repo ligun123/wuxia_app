@@ -41,23 +41,49 @@ class _XHomeViewState extends State<XHomeView>
       body: ListView.builder(
         itemCount: bookshelf?.length ?? 0,
         itemBuilder: (ctx, index) {
-          return Padding(
-            padding: EdgeInsets.only(
-              left: 12,
-              right: 12,
-              top: 4,
-              bottom: 4,
-            ),
-            child: XBookCell(
-              bookModel: bookshelf[index],
-              onTap: (book) {
-                //TODO: read now
-              },
-            ),
-          );
+          return _buildCell(context, book: bookshelf[index]);
         },
       ),
     );
+  }
+
+  Widget _buildCell(BuildContext context, {MBook book}) {
+    Widget cell = Padding(
+      padding: EdgeInsets.only(
+        left: 12,
+        right: 12,
+        top: 4,
+        bottom: 4,
+      ),
+      child: XBookCell(
+        bookModel: book,
+        onTap: (b) {
+          //TODO: read now
+        },
+      ),
+    );
+    cell = Dismissible(
+      key: Key(book.uid),
+      direction: DismissDirection.endToStart,
+      child: cell,
+      onDismissed: (direction) {
+        setState(() {
+          setState(() {
+            XGlobalInherited.of(context).bookshelf.remove(book);
+          });
+        });
+      },
+      background: Container(
+        color: Colors.red,
+        child: ListTile(
+          trailing: Icon(
+            Icons.delete,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+    return cell;
   }
 
   @override

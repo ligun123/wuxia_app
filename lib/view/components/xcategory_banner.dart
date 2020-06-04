@@ -43,7 +43,6 @@ class XCategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(category);
     final body = Container(
       decoration: BoxDecoration(
         border: Border.all(width: 0.5, color: Theme.of(context).buttonColor),

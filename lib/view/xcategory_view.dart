@@ -1,6 +1,7 @@
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xapi.dart';
 import 'package:app/view/components/xbook_cell.dart';
+import 'package:app/xroutes.dart';
 import 'package:flutter/material.dart';
 
 class XCategoryView extends StatefulWidget {
@@ -47,5 +48,7 @@ class _XCategoryViewState extends State<XCategoryView> {
     );
   }
 
-  void bookCellTap(MBook book) {}
+  void bookCellTap(MBook book) {
+    XRoutes.push(context, "XBookView", arguments: [book.uid]);
+  }
 }

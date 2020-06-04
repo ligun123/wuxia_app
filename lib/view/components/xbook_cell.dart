@@ -32,7 +32,7 @@ class XBookCell extends StatelessWidget {
                 SizedBox(height: 4),
                 Text(
                   bookModel.name,
-                  style: theme.textTheme.subhead,
+                  style: theme.textTheme.subtitle1,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

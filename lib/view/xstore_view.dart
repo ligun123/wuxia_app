@@ -13,7 +13,8 @@ class XStoreView extends StatefulWidget {
   _XStoreViewState createState() => _XStoreViewState();
 }
 
-class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMixin {
+class _XStoreViewState extends State<XStoreView>
+    with AutomaticKeepAliveClientMixin {
   XStoreViewModel _viewModel;
 
   @override
@@ -55,7 +56,12 @@ class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMi
               itemCount: data.bookGroup.length + 1,
               itemBuilder: (ctx, index) {
                 if (index == 0) {
-                  return XCategoryBanner();
+                  return StreamBuilder(
+                    stream: _viewModel.categorySubj.stream,
+                    builder: (ctx, AsyncSnapshot<List<String>> snap) {
+                      return XCategoryBanner(categorys: snap.data,);
+                    },
+                  );
                 } else {
                   final groupModel = data.bookGroup[index - 1];
                   return XBookGroupView(
@@ -69,7 +75,6 @@ class _XStoreViewState extends State<XStoreView> with AutomaticKeepAliveClientMi
       ),
     );
   }
-
 
   @override
   void dispose() {

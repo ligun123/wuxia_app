@@ -1,29 +1,34 @@
+import 'package:app/view/components/xglobal_loading_view.dart';
 import 'package:flutter/material.dart';
 
 class XCategoryBanner extends StatelessWidget {
-  const XCategoryBanner({Key key}) : super(key: key);
+  final List<String> categorys;
+  const XCategoryBanner({Key key, this.categorys}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (categorys == null || categorys.length == 0) {
+      return XGlobalNeterrorView();
+    }
     return Container(
       child: GridView.count(
         shrinkWrap: true,
         crossAxisCount: 4,
-        children: <Widget>[
-          XCategoryItem(),
-          XCategoryItem(),
-          XCategoryItem(),
-          XCategoryItem(),
-          XCategoryItem(),
-          XCategoryItem(),
-        ],
+        children: categorys
+            .map(
+              (f) => XCategoryItem(
+                category: f,
+              ),
+            )
+            .toList(),
       ),
     );
   }
 }
 
 class XCategoryItem extends StatelessWidget {
-  const XCategoryItem({Key key}) : super(key: key);
+  final String category;
+  const XCategoryItem({Key key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +42,10 @@ class XCategoryItem extends StatelessWidget {
         children: <Widget>[
           Image.asset("assets/icon_fantasy.png"),
           Text(
-            "Fantasy",
+            category,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subhead,
+            style: Theme.of(context).textTheme.subtitle1,
           ),
         ],
       ),

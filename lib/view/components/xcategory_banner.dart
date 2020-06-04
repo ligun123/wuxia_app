@@ -1,4 +1,5 @@
 import 'package:app/view/components/xglobal_loading_view.dart';
+import 'package:app/xroutes.dart';
 import 'package:flutter/material.dart';
 
 class XCategoryBanner extends StatelessWidget {
@@ -63,7 +64,7 @@ class XCategoryItem extends StatelessWidget {
     );
     return GestureDetector(
       onTap: () {
-        //TODO:跳转category列表
+        XRoutes.push(context, "XCategoryView", arguments: [category]);
       },
       child: body,
     );

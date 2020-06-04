@@ -1,4 +1,5 @@
 import 'package:app/view/xbook_view.dart';
+import 'package:app/view/xcategory_view.dart';
 import 'package:app/view/xchapter_view.dart';
 import "package:app/view/xsub_view.dart";
 import "package:app/xbottom_controller.dart";
@@ -44,6 +45,11 @@ class XRoutes {
     "XChapterView": (RouteSettings settings) {
       return XChapterView();
     },
+    "XCategoryView": (RouteSettings settings) {
+      return XCategoryView(
+        category: _argOf(settings.arguments, 0),
+      );
+    },
   };
 
   static Route<dynamic> routeGenerater(RouteSettings settings) {
@@ -82,7 +88,8 @@ class XRoutes {
   static Future<T> pushReplacement<T extends Object>(
       BuildContext context, String routeName,
       {List arguments}) {
-    return Navigator.of(context).pushReplacementNamed(routeName, arguments: arguments);
+    return Navigator.of(context)
+        .pushReplacementNamed(routeName, arguments: arguments);
   }
 
   /// 通过传入页面的Type来实现跳转

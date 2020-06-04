@@ -73,13 +73,17 @@ class XApi {
     });
   }
 
-  static Future<XResponse<MCategory>> categoryList({String category}) {
+  static Future<XResponse<List<MBook>>> categoryList({String category}) {
     final req = XRequest(
       path: "/category/list",
       query: {"category": category},
     );
-    return req.send<MCategory>((json) {
-      return MCategory.fromJson(json);
+    return req.send<List<MBook>>((json) {
+      return (json as List)
+          .map<MBook>(
+            (f) => MBook.fromJson(f),
+          )
+          .toList();
     });
   }
 

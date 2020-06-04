@@ -1,6 +1,7 @@
 import "package:app/view/xhome_view.dart";
 import "package:app/view/xstore_view.dart";
 import "package:app/view/xsettings_view.dart";
+import 'package:app/view_model/xstore_view_model.dart';
 import "package:flutter/material.dart";
 
 class XBottomController extends StatefulWidget {
@@ -11,15 +12,18 @@ class XBottomController extends StatefulWidget {
 
 class _XBottomControllerState extends State<XBottomController> {
   final pageViews = <Widget>[];
+  final storeViewModel = XStoreViewModel();
   PageController pageController;
   int pageIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    storeViewModel.fetchHome();
+    storeViewModel.fetchCategory();
     pageViews.addAll([
       XHomeView(),
-      XStoreView(),
+      XStoreView(viewModel: storeViewModel,),
       XSettingsView(),
     ]);
     pageController = PageController(initialPage: pageIndex);
@@ -66,5 +70,6 @@ class _XBottomControllerState extends State<XBottomController> {
   @override
   void dispose() {
     super.dispose();
+    print("_XBottomControllerState.dispose");
   }
 }

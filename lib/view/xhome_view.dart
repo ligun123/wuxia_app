@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:app/model/mbook.dart';
 import 'package:app/utils/xdb_manager.dart';
 import 'package:app/utils/xglobal_inherit.dart';
@@ -12,28 +11,16 @@ class XHomeView extends StatefulWidget {
   _XHomeViewState createState() => _XHomeViewState();
 }
 
-class _XHomeViewState extends State<XHomeView>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+class _XHomeViewState extends State<XHomeView> {
   @override
   void initState() {
     super.initState();
-    XDBManager.shared.openDB();
-    XDBManager.shared.getValue("bookshelf").then((onValue) {
-      final List jsonList = jsonDecode(onValue ?? "[]");
-      final bookList = jsonList.map<MBook>((f) => MBook.fromJson(f)).toList();
-      setState(() {
-        XGlobalInherited.of(context).bookshelf.books = bookList;
-      });
-    });
+    loadBookshelf();
   }
 
   @override
   Widget build(BuildContext context) {
     final bookshelf = XGlobalInherited.of(context).bookshelf.books;
-    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -87,7 +74,30 @@ class _XHomeViewState extends State<XHomeView>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("didChangeDependencies");
+  }
+
+  @override
+  void didUpdateWidget(XHomeView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("didUpdateWidget");
+  }
+
+  @override
   void dispose() {
     super.dispose();
+  }
+
+  void loadBookshelf() {
+    XDBManager.shared.openDB();
+    XDBManager.shared.getValue("bookshelf").then((onValue) {
+      final List jsonList = jsonDecode(onValue ?? "[]");
+      final bookList = jsonList.map<MBook>((f) => MBook.fromJson(f)).toList();
+      setState(() {
+        XGlobalInherited.of(context).bookshelf.books = bookList;
+      });
+    });
   }
 }

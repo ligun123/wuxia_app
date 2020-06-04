@@ -78,7 +78,7 @@ class XDBManager {
   Future<String> dbPath() async {
     final dirPath = await getDatabasesPath();
     await Directory(dirPath).create(recursive: true);
-    final dbPath = dirPath + (dirPath.endsWith('/') ? '.cache' : '/.cache');
+    final dbPath = dirPath + (dirPath.endsWith('/') ? '.kv' : '/.kv');
     return dbPath;
   }
 

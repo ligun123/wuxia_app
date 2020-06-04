@@ -1,4 +1,3 @@
-import 'package:app/utils/xdb_manager.dart';
 import 'package:app/utils/xglobal_inherit.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -6,7 +5,21 @@ import 'package:app/utils/xrequest.dart';
 import 'package:app/xroutes.dart';
 
 void main() {
-  final option = BaseOptions(
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+
+  @override
+  void initState() { 
+    super.initState();
+    final option = BaseOptions(
     // baseUrl: "https://wuxianovel.net:8081",
     baseUrl: "http://wuxianovel.net:8080",
     connectTimeout: 5000,
@@ -18,11 +31,8 @@ void main() {
     },
   );
   XRequest.setupDio(option);
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  XRequest.addCache();
+  }
 
   @override
   Widget build(BuildContext context) {

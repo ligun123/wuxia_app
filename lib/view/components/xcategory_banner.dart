@@ -28,10 +28,21 @@ class XCategoryBanner extends StatelessWidget {
 
 class XCategoryItem extends StatelessWidget {
   final String category;
-  const XCategoryItem({Key key, this.category}) : super(key: key);
+  final Map _imgMap = {
+    "Fantasy": "assets/icon_fantasy.png",
+    "Xianxia": "assets/icon_xianxia.png",
+    "Game": "assets/icon_game.png",
+    "Sci-fi": "assets/icon_sci-fi.png",
+    "Historical": "assets/icon_historical.png",
+    "女生频道": "assets/icon_girl.png",
+    "Romantic": "assets/icon_romantic.png",
+    "小说同人": "assets/icon_colleague.png",
+  };
+  XCategoryItem({Key key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(category);
     final body = Container(
       decoration: BoxDecoration(
         border: Border.all(width: 0.5, color: Theme.of(context).buttonColor),
@@ -40,7 +51,7 @@ class XCategoryItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Image.asset("assets/icon_fantasy.png"),
+          Image.asset(_imgMap[category], color: Colors.black54,),
           Text(
             category,
             overflow: TextOverflow.ellipsis,
@@ -57,4 +68,6 @@ class XCategoryItem extends StatelessWidget {
       child: body,
     );
   }
+
+  Widget _buildImage() {}
 }

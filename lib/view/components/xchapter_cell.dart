@@ -9,11 +9,14 @@ class XChapterCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      padding: EdgeInsets.only(left: 16, right: 16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border(bottom: BorderSide(color: Colors.black12, width: 0.5)),
+      ),
+      margin: EdgeInsets.only(left: 16, right: 16),
       height: 32,
       alignment: Alignment.centerLeft,
-      child: Text(chapter.name),
+      child: Text(chapter.name, maxLines: 1, overflow: TextOverflow.ellipsis,),
     );
     return GestureDetector(
       onTap: () {

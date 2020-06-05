@@ -8,9 +8,20 @@ import 'package:flutter/material.dart';
 
 class XCategoryView extends StatefulWidget {
   final String category;
-  XCategoryView({Key key, this.category}) : super(key: key);
+  final List<MBook> books;
+  XCategoryView({
+    Key key,
+    this.category,
+    this.books,
+  }) : super(key: key);
 
-  _XCategoryViewState createState() => _XCategoryViewState();
+  _XCategoryViewState createState() {
+    if (books == null) {
+      return _XCategoryViewState();
+    } else {
+      return _XCategoryBookState();
+    }
+  }
 }
 
 class _XCategoryViewState extends State<XCategoryView> {
@@ -35,11 +46,11 @@ class _XCategoryViewState extends State<XCategoryView> {
       appBar: AppBar(
         title: Text(widget.category),
       ),
-      body: _buildBody(context),
+      body: buildBody(context),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget buildBody(BuildContext context) {
     if (_resp == null) {
       return XGlobalNeterrorView(
         errorMsg: "Loading...",
@@ -70,5 +81,33 @@ class _XCategoryViewState extends State<XCategoryView> {
 
   void bookCellTap(MBook book) {
     XRoutes.push(context, "XBookView", arguments: [book.uid]);
+  }
+}
+
+class _XCategoryBookState extends _XCategoryViewState {
+
+  @override
+  void refresh() {
+    //do nothing.
+  }
+  
+  @override
+  Widget buildBody(BuildContext context) {
+    return ListView(
+      children: widget.books
+          .map((f) => Padding(
+                padding: EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                  top: 4,
+                  bottom: 4,
+                ),
+                child: XBookCell(
+                  bookModel: f,
+                  onTap: bookCellTap,
+                ),
+              ))
+          .toList(),
+    );
   }
 }

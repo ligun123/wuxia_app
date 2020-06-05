@@ -48,6 +48,7 @@ class XRoutes {
     "XCategoryView": (RouteSettings settings) {
       return XCategoryView(
         category: _argOf(settings.arguments, 0),
+        books: _argOf(settings.arguments, 1),
       );
     },
   };

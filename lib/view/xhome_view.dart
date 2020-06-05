@@ -23,7 +23,7 @@ class _XHomeViewState extends State<XHomeView> {
     final bookshelf = XGlobalInherited.of(context).bookshelf.books;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("Bookshelf"),
       ),
       body: ListView.builder(
         itemCount: bookshelf?.length ?? 0,

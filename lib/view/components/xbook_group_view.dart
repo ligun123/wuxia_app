@@ -28,7 +28,8 @@ class XBookGroupView extends StatelessWidget {
 
   Widget _buildTitleRow(BuildContext context) {
     final theme = Theme.of(context);
-    return SizedBox(
+    Widget widget = Container(
+      color: Color(0x00000000),
       height: 56,
       child: Row(
         children: <Widget>[
@@ -40,22 +41,23 @@ class XBookGroupView extends StatelessWidget {
           SizedBox(width: 4),
           Text(
             groupModel.section,
-            style: theme.textTheme.subtitle,
+            style: theme.textTheme.subtitle2,
           ),
           Spacer(),
-          GestureDetector(
-            child: Text(
-              "More",
-              style:
-                  theme.textTheme.subtitle.copyWith(color: theme.primaryColor),
-            ),
-            onTap: () {
-              //TODO: jump to more
-            },
-          )
+          Text(
+            "More",
+            style: theme.textTheme.subtitle2.copyWith(color: theme.primaryColor),
+          ),
         ],
       ),
     );
+    widget = GestureDetector(
+      onTap: () {
+        XRoutes.push(context, "XCategoryView", arguments: [groupModel.section, groupModel.books]);
+      },
+      child: widget,
+    );
+    return widget;
   }
 
   Widget _buildContent(BuildContext context) {

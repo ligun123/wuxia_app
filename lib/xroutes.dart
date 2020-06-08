@@ -1,5 +1,6 @@
 import 'package:app/view/xbook_view.dart';
 import 'package:app/view/xcategory_view.dart';
+import 'package:app/view/xchapter_list_view.dart';
 import 'package:app/view/xchapter_view.dart';
 import "package:app/view/xsub_view.dart";
 import "package:app/xbottom_controller.dart";
@@ -49,6 +50,12 @@ class XRoutes {
       return XCategoryView(
         category: _argOf(settings.arguments, 0),
         books: _argOf(settings.arguments, 1),
+      );
+    },
+    "XChapterListView": (RouteSettings settings) {
+      return XChapterListView(
+        bookId: _argOf(settings.arguments, 0),
+        name: _argOf(settings.arguments, 1),
       );
     },
   };

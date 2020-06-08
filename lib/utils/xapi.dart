@@ -4,6 +4,7 @@ import 'package:app/model/mhome.dart';
 import 'package:app/utils/xrequest.dart';
 import 'package:app/utils/xresponse.dart';
 import 'package:dcache_flutter/dcache.dart';
+import 'package:flutter/foundation.dart';
 
 class XApi {
   /**
@@ -78,6 +79,28 @@ class XApi {
     );
     return req.send<MChapter>((json) {
       return MChapter.fromJson(json);
+    });
+  }
+
+  static Future<XResponse<List<MChapterSimple>>> chapterList(
+      {@required String bookid, int page, int size = 50}) {
+    final req = XRequest(
+      cacheDuration: Duration(hours: 12),
+      cachePolicy: DCachePolicy.cacheFirst,
+      method: XRequestMethod.GET,
+      path: "/chapter/list",
+      query: {
+        "page": page,
+        "size": size,
+        "bookid": bookid,
+      },
+    );
+    return req.send<List<MChapterSimple>>((json) {
+      return json == null
+          ? []
+          : (json as List)
+              .map<MChapterSimple>((f) => MChapterSimple.fromJson(f))
+              .toList();
     });
   }
 

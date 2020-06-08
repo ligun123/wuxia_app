@@ -137,15 +137,17 @@ class _XBookViewState extends State<XBookView> {
       listChildren.add(
         GestureDetector(
           onTap: () {
-            //TODO: -> chapter menu view
-            print("->menu...");
+            XRoutes.push(context, "XChapterListView", arguments: [
+              book.id.toString(),
+              book.name,
+            ]);
           },
           child: Container(
             color: Theme.of(context).scaffoldBackgroundColor,
             padding: EdgeInsets.only(left: 16, right: 16),
             height: 32,
             alignment: Alignment.centerLeft,
-            child: Text("..."),
+            child: Text("More ..."),
           ),
         ),
       );

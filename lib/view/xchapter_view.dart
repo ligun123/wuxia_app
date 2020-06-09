@@ -15,6 +15,7 @@ class XChapterView extends StatefulWidget {
 }
 
 class _XChapterViewState extends State<XChapterView> {
+  final scrollController = ScrollController();
   final chapterList = <MChapter>[];
 
   MChapter currentChapter;
@@ -39,7 +40,7 @@ class _XChapterViewState extends State<XChapterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chapter"),
+        title: Text(currentChapter.name),
       ),
       body: Stack(
         children: <Widget>[
@@ -47,10 +48,17 @@ class _XChapterViewState extends State<XChapterView> {
             onLoad: loadMore,
             onRefresh: loadPrevious,
             child: ListView.builder(
+              controller: scrollController,
               itemCount: chapterList.length,
               itemBuilder: (ctx, index) {
                 final cp = chapterList[index];
-                return Text(cp.content);
+                return Column(
+                  children: <Widget>[
+                    SizedBox(height: 24,),
+                    Text(cp.name, style: TextStyle(fontSize: 24),),
+                    Text(cp.content),
+                  ],
+                );
               },
             ),
           ),
@@ -80,6 +88,7 @@ class _XChapterViewState extends State<XChapterView> {
           .then((resp) {
         if (resp.isOK()) {
           setState(() {
+            scrollController.jumpTo(100);
             chapterList.insert(0, resp.data);
             currentChapter = resp.data;
           });

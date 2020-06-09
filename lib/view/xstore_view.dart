@@ -5,6 +5,8 @@ import 'package:app/view/components/xglobal_loading_view.dart';
 import 'package:app/view_model/xstore_view_model.dart';
 import "package:flutter/material.dart";
 
+import '../xroutes.dart';
+
 class XStoreView extends StatefulWidget {
   final XStoreViewModel viewModel;
   XStoreView({Key key, this.viewModel}) : super(key: key);
@@ -14,8 +16,6 @@ class XStoreView extends StatefulWidget {
 
 class _XStoreViewState extends State<XStoreView>
     with AutomaticKeepAliveClientMixin {
-  
-
   @override
   bool get wantKeepAlive => true;
 
@@ -30,6 +30,14 @@ class _XStoreViewState extends State<XStoreView>
     return Scaffold(
       appBar: AppBar(
         title: Text("Store"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              XRoutes.push(context, "XSearchView");
+            },
+          ),
+        ],
       ),
       body: Container(
         margin: EdgeInsets.only(top: 12, bottom: 12),
@@ -54,7 +62,9 @@ class _XStoreViewState extends State<XStoreView>
                   return StreamBuilder(
                     stream: widget.viewModel.categorySubj.stream,
                     builder: (ctx, AsyncSnapshot<List<String>> snap) {
-                      return XCategoryBanner(categorys: snap.data,);
+                      return XCategoryBanner(
+                        categorys: snap.data,
+                      );
                     },
                   );
                 } else {

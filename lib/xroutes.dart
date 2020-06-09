@@ -2,6 +2,7 @@ import 'package:app/view/xbook_view.dart';
 import 'package:app/view/xcategory_view.dart';
 import 'package:app/view/xchapter_list_view.dart';
 import 'package:app/view/xchapter_view.dart';
+import 'package:app/view/xsearch_view.dart';
 import "package:app/view/xsub_view.dart";
 import "package:app/xbottom_controller.dart";
 import "package:flutter/material.dart";
@@ -59,6 +60,9 @@ class XRoutes {
         bookId: _argOf(settings.arguments, 0),
         name: _argOf(settings.arguments, 1),
       );
+    },
+    "XSearchView": (RouteSettings settings) {
+      return XSearchView();
     },
   };
 

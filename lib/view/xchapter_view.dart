@@ -40,7 +40,7 @@ class _XChapterViewState extends State<XChapterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentChapter.name),
+        title: Text(currentChapter?.name ?? ""),
       ),
       body: Stack(
         children: <Widget>[

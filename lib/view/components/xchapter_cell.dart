@@ -20,7 +20,7 @@ class XChapterCell extends StatelessWidget {
     );
     return GestureDetector(
       onTap: () {
-        XRoutes.push(context, "XChapterView");
+        XRoutes.push(context, "XChapterView", arguments: [chapter]);
       },
       child: body,
     );

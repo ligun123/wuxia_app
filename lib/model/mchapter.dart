@@ -46,7 +46,6 @@ class MChapter extends XModel {
         "read_count": readCount,
         "time": time,
       };
-
 }
 
 /**
@@ -55,20 +54,27 @@ class MChapter extends XModel {
 class MChapterSimple extends XModel {
   int id;
   String name;
+  int cindex;
+  int bookId;
 
   MChapterSimple({
     this.id,
     this.name,
+    this.cindex,
+    this.bookId,
   });
 
   factory MChapterSimple.fromJson(Map<String, dynamic> json) => MChapterSimple(
         id: json["id"],
         name: json["name"],
+        cindex: json["cindex"],
+        bookId: json["book_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name.replaceAll("'", "’"),
+        "cindex": cindex,
+        "book_id": bookId,
       };
-      
 }

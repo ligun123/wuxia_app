@@ -50,6 +50,22 @@ class XApi {
     });
   }
 
+  static Future<XResponse<MChapter>> chapterDetail(
+      {int bookid, int cindex}) {
+    final req = XRequest(
+        cacheDuration: Duration(days: 30),
+        cachePolicy: DCachePolicy.cacheFirst,
+        method: XRequestMethod.GET,
+        path: "/chapter",
+        query: {
+          "bookid": bookid,
+          "index": cindex,
+        });
+    return req.send<MChapter>((json) {
+      return MChapter.fromJson(json);
+    });
+  }
+
   static Future<XResponse<MChapter>> chapterNext({int index, String bookid}) {
     final req = XRequest(
       cacheDuration: Duration(days: 30),

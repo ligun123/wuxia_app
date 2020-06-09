@@ -172,7 +172,7 @@ class _XBookViewState extends State<XBookView> {
               children: <Widget>[
                 Text(
                   "Updated at ${date.month}/${date.day}/${date.year}",
-                  style: theme.textTheme.subtitle.copyWith(
+                  style: theme.textTheme.subtitle2.copyWith(
                     color: theme.accentColor,
                     fontSize: 14,
                   ),
@@ -199,7 +199,9 @@ class _XBookViewState extends State<XBookView> {
       ),
     );
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        XRoutes.push(context, "XChapterView", arguments: [book.latestChapter]);
+      },
       child: body,
     );
   }

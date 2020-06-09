@@ -44,7 +44,9 @@ class XRoutes {
       );
     },
     "XChapterView": (RouteSettings settings) {
-      return XChapterView();
+      return XChapterView(
+        initChapter: _argOf(settings.arguments, 0),
+      );
     },
     "XCategoryView": (RouteSettings settings) {
       return XCategoryView(

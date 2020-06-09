@@ -210,28 +210,30 @@ class _XBookViewState extends State<XBookView> {
     final hasBook = XGlobalInherited.of(context)
         .bookshelf
         .hasBook(MBook(uid: widget.bookId));
-    return Container(
-      height: 36,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Expanded(
-            child: FlatButton(
-              color: Colors.pinkAccent,
-              textColor: Colors.white,
-              onPressed: hasBook ? null : addToBookshelfTap,
-              child: Text("Add To Bookshelf"),
+    return SafeArea(
+      child: Container(
+        height: 36,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Expanded(
+              child: FlatButton(
+                color: Colors.pinkAccent,
+                textColor: Colors.white,
+                onPressed: hasBook ? null : addToBookshelfTap,
+                child: Text("Add To Bookshelf"),
+              ),
             ),
-          ),
-          Expanded(
-            child: FlatButton(
-              textColor: Colors.pinkAccent,
-              onPressed: readNowTap,
-              child: Text("Read Now"),
+            Expanded(
+              child: FlatButton(
+                textColor: Colors.pinkAccent,
+                onPressed: readNowTap,
+                child: Text("Read Now"),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

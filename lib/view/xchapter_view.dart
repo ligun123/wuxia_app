@@ -40,31 +40,44 @@ class _XChapterViewState extends State<XChapterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentChapter?.name ?? ""),
+        title: Text(currentChapter?.name ?? "Loading..."),
       ),
-      body: Stack(
-        children: <Widget>[
-          EasyRefresh(
-            onLoad: loadMore,
-            onRefresh: loadPrevious,
-            child: ListView.builder(
-              controller: scrollController,
-              itemCount: chapterList.length,
-              itemBuilder: (ctx, index) {
-                final cp = chapterList[index];
-                return Column(
-                  children: <Widget>[
-                    SizedBox(height: 24,),
-                    Text(cp.name, style: TextStyle(fontSize: 24),),
-                    Text(cp.content),
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            _buildContent(context),
+          ],
+        ),
       ),
     );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    Widget body = EasyRefresh(
+      onLoad: loadMore,
+      onRefresh: loadPrevious,
+      child: ListView.builder(
+        controller: scrollController,
+        itemCount: chapterList.length,
+        itemBuilder: (ctx, index) {
+          final cp = chapterList[index];
+          return Column(
+            children: <Widget>[
+              SizedBox(
+                height: 24,
+              ),
+              Text(
+                cp.name,
+                style: TextStyle(fontSize: 24),
+              ),
+              Text(cp.content),
+            ],
+          );
+        },
+      ),
+    );
+    body = Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: body,);
+    return body;
   }
 
   Future<XResponse> loadMore() {
